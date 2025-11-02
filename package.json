@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "homepage": "/joris/",
   "private": true,
+  "engines": {
+    "node": "18.x"
+  },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
     "@huggingface/inference": "^2.8.1",

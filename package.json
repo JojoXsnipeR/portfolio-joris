@@ -1,7 +1,6 @@
 {
   "name": "projet",
   "version": "0.1.0",
-  "homepage": "/joris/",
   "private": true,
   "engines": {
     "node": "22.x"

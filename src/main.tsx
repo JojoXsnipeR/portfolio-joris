@@ -555,7 +555,7 @@ const Main: React.FC = () => {
         const loader = new GLTFLoader();
         loader.setDRACOLoader(dracoLoader);
 
-        const gltfPath = '/joris/env/car.glb';
+        const gltfPath = '/env/car.glb';
 
         loader.load(gltfPath, (gltf: any) => {
             const model = gltf.scene;

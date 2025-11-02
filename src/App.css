@@ -1,0 +1,62 @@
+:root {
+  --c0: #0c0c0c;
+  --c1: #eeece8;
+  --c2: #0b090e50;
+  --c3: #eeece850;
+  --e0: #9e1010;
+  --m0: #131211;
+  --m1: #c5c5c3;
+}
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+body,
+html {
+  overflow-x: hidden !important;
+  touch-action: pan-y;
+  -ms-touch-action: pan-y;
+  user-select: none;
+}
+
+body {
+  margin: 0;
+  font-family: Afacad Flux, Raleway sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--m1);
+  color: var(--m0);
+}
+.cv-button {
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: #0078ff;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: background-color 0.25s ease, transform 0.15s ease;
+}
+
+.cv-button:hover {
+  background-color: #005ecc;
+  transform: scale(1.05);
+}
+.btn-secondary {
+  background-color: #0078ff;
+  color: white;
+  border: none;
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 10px 22px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background-color: #005ecc;
+  transform: scale(1.05);
+}

@@ -1,0 +1,68 @@
+{
+  "name": "projet",
+  "version": "0.1.0",
+  "homepage": "/joris/",
+  "private": true,
+  "dependencies": {
+    "@emailjs/browser": "^4.4.1",
+    "@huggingface/inference": "^2.8.1",
+    "@react-three/drei": "^9.114.3",
+    "@studio-freight/lenis": "^1.0.42",
+    "@tanstack/react-virtual": "^3.13.6",
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^27.5.2",
+    "@types/node": "^16.18.113",
+    "@types/react": "^18.3.11",
+    "@types/react-dom": "^18.3.1",
+    "axios": "^1.7.9",
+    "framer-motion": "^10.16.4",
+    "fs": "^0.0.1-security",
+    "gsap": "^3.12.7",
+    "lenis": "^1.1.14",
+    "playht": "^0.16.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-google-recaptcha": "^3.1.0",
+    "react-helmet": "^6.1.0",
+    "react-helmet-async": "^2.0.5",
+    "react-router-dom": "^6.27.0",
+    "react-scripts": "5.0.1",
+    "react-scroll-parallax": "^3.4.5",
+    "split-type": "^0.3.4",
+    "three": "^0.169.0",
+    "typescript": "^4.9.5",
+    "web-vitals": "^2.1.4",
+    "xlsx": "^0.18.5"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@types/react-google-recaptcha": "^2.1.9",
+    "@types/react-helmet": "^6.1.11",
+    "@types/three": "^0.169.0"
+  }
+}

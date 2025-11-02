@@ -179,13 +179,6 @@ const Main: React.FC = () => {
 
     return (
         <>
-            <div className="loader">
-                <svg className="loader-svg" width="50" height="50" viewBox="0 0 50 50">
-                    <circle className="loader-circle" cx="25" cy="25" r="20" fill="none" stroke="currentColor" strokeWidth="4" />
-                </svg>
-                <div className="loading-text">chargement du portfolio</div>
-            </div>
-
             <div className="cursor">
                 <div ref={cursorOuterRef} className="cursor-outline"></div>
             </div>

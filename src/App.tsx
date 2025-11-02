@@ -54,7 +54,7 @@ const App: React.FC = () => {
         <Suspense fallback={<Loader />}>
           <Routes location={location} key={location.pathname}>
             <Route
-              path="joris/"
+              path="/"
               element={
                 <HelmetWrapper title={t.title} description={t.description}>
                   <motion.div
@@ -84,9 +84,10 @@ const App: React.FC = () => {
               }
             />
           </Routes>
+
         </Suspense>
       </AnimatePresence>
-  
+
       {/* === Ton bouton de CV ici === */}
       <div style={{ textAlign: "center", marginTop: "40px", marginBottom: "40px" }}>
         <a
@@ -98,9 +99,9 @@ const App: React.FC = () => {
         </a>
       </div>
     </HelmetProvider>
-  
-  
-    
+
+
+
   );
 };
 

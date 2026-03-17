@@ -101,7 +101,7 @@ const Main: React.FC = () => {
             period: "Actuel Week-end et vacances",
             type: "CDD",
             responsibilities: [
-                "Équipier polyvalent certifié, promu formateur. Formation des nouveaux employés, transmission des procédures et contribution à l’organisation du service en équipe.",
+                "Équipier polyvalent certifié, promu formateur. Travail à la chaine, formation des nouveaux employés, transmission des procédures et contribution à l’organisation du service en équipe.",
             ]
         },
     ] as Experience[]), []);
@@ -117,7 +117,7 @@ const Main: React.FC = () => {
         {
            title: "Banc de mesure d’inductance industriel",
            description: "Conception d’un banc de test permettant la mesure rapide et précise de l’inductance de bobines pour Alphée (partenaire de Koenigsegg). Le système intègre électronique de mesure, IHM et acquisition de données avec enregistrement sur PC.",
-           technologies: ["ESP32", "WiFi", "C++", "Réseaux"],
+           technologies: ["ESP32", "WiFi", "C++", "Réseaux, PCB"],
            video: "/video/illustation-induct.mp4", 
         },
          {

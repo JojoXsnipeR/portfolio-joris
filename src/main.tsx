@@ -103,14 +103,14 @@ const Main: React.FC = () => {
             description: "Conception d’un véhicule connecté capable d’atteindre 20 km/h batisé RC-XD, pilotable via smartphone ou en mode autonome grâce à un système de suivi de ligne. Projet mené en autonomie : conception mécanique, architecture électronique, programmation embarquée et intégration des systèmes de contrôle.",
             technologies: ["C", "C++", "Python", "Arduino", "Électronique"],
             image: "/joris/imgs/fpv.png",
-            video: "/joris/video/voiture.mp4",
+            video: "/video/voiture.mp4",
         },
         {
             title: "Système domotique Jarvis",
             description: "Développement d’un assistant vocal domotique intelligent capable de contrôler un ordinateur, l’éclairage et divers appareils connectés. Conçu pour interagir à la voix, gérer des rappels et automatiser le quotidien, Jarvis est un système évolutif en amélioration continue, alliant logiciel, électronique et IA.",
             technologies: ["Next.js", "TypeScript", "Réseaux", "IoT", "TailwindCSS"],
             image: "/joris/imgs/jarvis.png",
-            video: "/joris/video/jarvis.mp4",
+            video: "/video/jarvis.mp4",
         },
     ] as Project[]), []);
 

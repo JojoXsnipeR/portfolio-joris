@@ -109,7 +109,7 @@ const Main: React.FC = () => {
            title: "Banc de mesure d’inductance industriel",
            description: "Conception d’un banc de test permettant la mesure rapide et précise de l’inductance de bobines pour Alphée (partenaire de Koenigsegg). Le système intègre électronique de mesure, IHM et acquisition de données avec enregistrement sur PC.",
            technologies: ["ESP32", "WiFi", "C++", "Réseaux"],
-           video: "/video/illustration-induct.mp4", 
+           video: "/video/illustation-induct.mp4", 
         },
          {
            title: "Système domotique Jarvis",

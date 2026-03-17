@@ -75,14 +75,13 @@ const Main: React.FC = () => {
 
     const experiences = useMemo(() => ([
         {
-            title: "Auxiliaire de Vie / Equipier McDonald",
-            company: "EHPAD Le Garezin / McDonald Reloc",
+            title: "Auxiliaire de Vie",
+            company: "EHPAD Le Garezin",
             location: "Francheville",
-            period: "07/2024 - 08/2024 / Actuel :Weekends",
+            period: "07/2024 - 08/2024",
             type: "CDD",
             responsibilities: [
                 "Aider les personnes dans les activités quotidiennes telles que se lever/se coucher, toilette et habillage",
-                "Gestion des commandes et du service client dans un environnement dynamique."
             ]
         },
         {
@@ -95,6 +94,16 @@ const Main: React.FC = () => {
                 "Maintenance et expertise de sondes à ultrasons pour l’imagerie médicale : analyse de pannes, mesures électroniques et réparations de précision en environnement biomédical.",
             ]
         }
+         {
+            title: "Equipier Formateur",
+            company: "McDonalds Reloc",
+            location: "Francheville",
+            period: "Actuel Week-end et vacances",
+            type: "CDD",
+            responsibilities: [
+                "Équipier polyvalent certifié, promu formateur. Formation des nouveaux employés, transmission des procédures et contribution à l’organisation du service en équipe.",
+            ]
+        },
     ] as Experience[]), []);
 
     const project = useMemo(() => ([

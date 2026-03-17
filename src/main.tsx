@@ -93,7 +93,7 @@ const Main: React.FC = () => {
             responsibilities: [
                 "Maintenance et expertise de sondes à ultrasons pour l’imagerie médicale : analyse de pannes, mesures électroniques et réparations de précision en environnement biomédical.",
             ]
-        }
+        },
          {
             title: "Equipier Formateur",
             company: "McDonalds Reloc",

@@ -146,12 +146,12 @@ const Main: React.FC = () => {
         ],
         languages: [
             { name: "Français", level: 100 },
-            { name: "Anglais", level: 70 }
+            { name: "Anglais B2", level: 80 }
         ],
         soft: [
-            { name: "Rigueur et Ponctualité", level: 90 },
+            { name: "Rigueur et Ponctualité", level: 100 },
             { name: "Travail en Équipe et Communication", level: 85 },
-            { name: "Adaptabilité", level: 88 },
+            { name: "Adaptabilité", level: 100 },
             { name: "Pensée Analytique", level: 92 },
             { name: "Autonomie", level: 95 }
         ]

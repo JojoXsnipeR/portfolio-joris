@@ -106,17 +106,17 @@ const Main: React.FC = () => {
             video: "/video/voiture.mp4",
         },
         {
-            title: "Système domotique Jarvis",
-            description: "Développement d’un assistant vocal domotique intelligent capable de contrôler un ordinateur, l’éclairage et divers appareils connectés. Conçu pour interagir à la voix, gérer des rappels et automatiser le quotidien, Jarvis est un système évolutif en amélioration continue, alliant logiciel, électronique et IA.",
-            technologies: ["Next.js", "TypeScript", "Réseaux", "IoT", "TailwindCSS"],
-            image: "/joris/imgs/jarvis.png",
-            video: "/video/jarvis.mp4",
+           title: "Banc de mesure d’inductance industriel",
+           description: "Conception d’un banc de test permettant la mesure rapide et précise de l’inductance de bobines pour Alphée (partenaire de Koenigsegg). Le système intègre électronique de mesure, IHM et acquisition de données avec enregistrement sur PC.",
+           technologies: ["ESP32", "WiFi", "C++", "Réseaux"],
+           video: "/video/illustration-induct.mp4", 
         },
          {
-        title: "Banc de mesure d’inductance industriel",
-        description: "Conception d’un banc de test permettant la mesure rapide et précise de l’inductance de bobines pour Alphée (partenaire de Koenigsegg). Le système intègre électronique de mesure, IHM et acquisition de données avec enregistrement sur PC.",
-        technologies: ["ESP32", "WiFi", "C++", "Réseaux"],
-        video: "/video/illustration-induct.mp4", 
+           title: "Système domotique Jarvis",
+           description: "Développement d’un assistant vocal domotique intelligent capable de contrôler un ordinateur, l’éclairage et divers appareils connectés. Conçu pour interagir à la voix, gérer des rappels et automatiser le quotidien, Jarvis est un système évolutif en amélioration continue, alliant logiciel, électronique et IA.",
+           technologies: ["Next.js", "TypeScript", "Réseaux", "IoT", "TailwindCSS"],
+           image: "/joris/imgs/jarvis.png",
+           video: "/video/jarvis.mp4",
     }
 
     ] as Project[]), []);

@@ -112,6 +112,13 @@ const Main: React.FC = () => {
             image: "/joris/imgs/jarvis.png",
             video: "/video/jarvis.mp4",
         },
+         {
+        title: "Banc de mesure d’inductance industriel",
+        description: "Conception d’un banc de test permettant la mesure rapide et précise de l’inductance de bobines pour Alphée (partenaire de Koenigsegg). Le système intègre électronique de mesure, IHM et acquisition de données avec enregistrement sur PC.",
+        technologies: ["ESP32", "WiFi", "C++", "Réseaux"],
+        video: "/video/illustration-induct.mp4", 
+    }
+
     ] as Project[]), []);
 
     const skills = useMemo(() => ({

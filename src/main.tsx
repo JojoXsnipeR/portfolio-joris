@@ -508,10 +508,6 @@ const Main: React.FC = () => {
                 formDataObj.append('subject', formData.subject);
                 formDataObj.append('message', formData.message);
 
-                formDataObj.append('_captcha', 'false');
-                formDataObj.append('_template', 'table');
-                formDataObj.append('_subject', formData.subject);
-
                 const response = await fetch('https://formsubmit.co/ajax/payen.joris.pro@gmail.com'), {
                     method: 'POST',
                     headers: {

@@ -68,7 +68,7 @@ const Main: React.FC = () => {
         name: "Joris Payen",
         title: "Étudiant en systèmes électroniques et connectés et créateur autodidacte de projets techniques.",
         phone: "+33 7 87 49 86 86",
-        email: "joris_payen94@icloud.com",
+        email: "payen.joris.pro@gmail.com",
         address: "7 rue des cèdres, 69340 Francheville",
         about: "Créateur autodidacte de projets techniques, je suis convaincu que chaque innovation naît d'une idée claire, d'un plan structuré et d'une bonne dose de passion. En chemin vers le métier d’ingénieur, je suis prêt à m’investir pleinement pour concevoir les technologies électroniques de demain, avec méthode, énergie et ambition."
     }), []);
@@ -508,7 +508,11 @@ const Main: React.FC = () => {
                 formDataObj.append('subject', formData.subject);
                 formDataObj.append('message', formData.message);
 
-                const response = await fetch('https://formsubmit.co/ajax/joris_payen94@icloud.com', {
+                formDataObj.append('_captcha', 'false');
+                formDataObj.append('_template', 'table');
+                formDataObj.append('_subject', formData.subject);
+
+                const response = await fetch('https://formsubmit.co/ajax/payen.joris.pro@gmail.com'), {
                     method: 'POST',
                     headers: {
                         'Accept': 'application/json'

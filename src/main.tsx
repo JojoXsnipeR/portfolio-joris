@@ -95,13 +95,13 @@ const Main: React.FC = () => {
             ]
         },
          {
-            title: "Equipier Formateur",
+            title: "Manager",
             company: "McDonalds Reloc",
             location: "Francheville",
             period: "Actuel Week-end et vacances",
             type: "CDD",
             responsibilities: [
-                "Équipier polyvalent certifié, promu formateur. Travail à la chaine, formation des nouveaux employés, transmission des procédures et contribution à l’organisation du service en équipe.",
+                "Équipier polyvalent, promu Formateur, puis Manager. Réalisation des taches opértionnelles en service, formation et accompagnmentdes nouveaux emplyés, puis gestion et coordination d'une équipe importante.",
             ]
         },
     ] as Experience[]), []);

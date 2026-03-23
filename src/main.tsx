@@ -101,7 +101,7 @@ const Main: React.FC = () => {
             period: "Actuel Week-end et vacances",
             type: "CDD",
             responsibilities: [
-                "Équipier polyvalent, promu Formateur, puis Manager. Réalisation des taches opértionnelles en service, formation et accompagnmentdes nouveaux emplyés, puis gestion et coordination d'une équipe importante.",
+                "Équipier polyvalent, promu Formateur, puis Manager. Réalisation des taches opérationnelles en service, formation et accompagnment des nouveaux employés, puis gestion et coordination d'une équipe importante.",
             ]
         },
     ] as Experience[]), []);

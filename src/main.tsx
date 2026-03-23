@@ -508,7 +508,7 @@ const Main: React.FC = () => {
                 formDataObj.append('subject', formData.subject);
                 formDataObj.append('message', formData.message);
 
-                const response = await fetch('https://formsubmit.co/ajax/payen.joris.pro@gmail.com', {
+                const response = await fetch('https://formsubmit.co/ajax/joris_payen94@icloud.com', {
                     method: 'POST',
                     headers: {
                         'Accept': 'application/json'

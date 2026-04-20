@@ -150,10 +150,10 @@ const Main: React.FC = () => {
         ],
         soft: [
             { name: "Rigueur et Ponctualité", level: 100 },
-            { name: "Travail en Équipe et Communication", level: 85 },
+            { name: "Travail en Équipe et Communication", level: 100 },
             { name: "Adaptabilité", level: 100 },
-            { name: "Pensée Analytique", level: 92 },
-            { name: "Autonomie", level: 95 }
+            { name: "Pensée Analytique", level: 100 },
+            { name: "Autonomie", level: 100 }
         ]
     }), []);
 

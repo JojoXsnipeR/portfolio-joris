@@ -462,7 +462,7 @@ const Main: React.FC = () => {
                     <div className="logo">
                         <Link to="/">JP</Link>
                     </div>
-                    <nav className={`nav ${isMenuOpen ? 'nav-open' : ''}`}>
+                    <nav id="portfolio-navigation" className={`nav ${isMenuOpen ? 'nav-open' : ''}`}>
                         <ul className="nav-list">
                             {['accueil', 'à propos', 'compétences', 'expérience', 'projets', 'contact'].map((section) => (
                                 <li key={section} className="nav-item">
@@ -482,7 +482,9 @@ const Main: React.FC = () => {
                     <button
                         className={`menu-toggle ${isMenuOpen ? 'open' : ''}`}
                         onClick={() => setIsMenuOpen(!isMenuOpen)}
-                        aria-label="Basculer le menu"
+                        aria-label={isMenuOpen ? "Fermer le menu" : "Ouvrir le menu"}
+                        aria-expanded={isMenuOpen}
+                        aria-controls="portfolio-navigation"
                     >
                         <span></span>
                         <span></span>
@@ -517,7 +519,7 @@ const Main: React.FC = () => {
                                 <button className="btn btn-primary" onClick={() => scrollToSection('projects')}>
                                     Voir mes projets
                                 </button>
-                                <a href="/CV_Joris_Payen.pdf?v=20261122" download="CV_Joris_Payen.pdf" className="btn btn-secondary">
+                                <a href="/CV_Joris_Payen.pdf?v=20261122-final" download="CV_Joris_Payen.pdf" className="btn btn-secondary">
                                     Télécharger mon CV
                                 </a>
                                 <button className="btn btn-outline" onClick={() => scrollToSection('contact')}>
@@ -707,13 +709,19 @@ const Main: React.FC = () => {
                                         <span>Retrouver mon profil LinkedIn</span>
                                         <span aria-hidden="true">↗</span>
                                     </a>
+                                    <a href="/CV_Joris_Payen.pdf?v=20261122-final"
+                                       download="CV_Joris_Payen.pdf"
+                                       className="contact-social-link contact-cv-link">
+                                        <span>Télécharger mon CV</span>
+                                        <span aria-hidden="true">↓</span>
+                                    </a>
                                 </div>
 
                             </div>
 
                             <div className="contact-form">
                                 {formSubmitted && <p role="status">Votre demande a été transmise au service d’envoi. Merci pour votre message.</p>}
-                                {formError && <p role="alert">L’envoi a échoué. Vous pouvez me contacter directement par e-mail.</p>}
+                                {formError && <p role="alert" className="form-alert">L’envoi a échoué. <a href="mailto:payen.joris.pro@gmail.com?subject=Contact%20via%20le%20portfolio">Écrivez-moi directement par e-mail</a>.</p>}
                                 <form onSubmit={handleSubmit}>
                                     <div className="form-group">
                                         <label htmlFor="name" className="form-label">Votre Nom</label>

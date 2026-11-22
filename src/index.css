@@ -1868,3 +1868,11 @@ canvas {
 ::-webkit-scrollbar-track {
   background: transparent;
 }
+/* 2026 update: descriptive skills instead of arbitrary percentage bars */
+.skills-grid .skill-item {
+  border: 1px solid rgba(150,150,150,.22);
+  border-radius: 10px;
+  padding: 12px 16px;
+  background: rgba(150,150,150,.04);
+}
+.skills-grid .skill-header { margin-bottom: 0; }

@@ -66,102 +66,90 @@ const Main: React.FC = () => {
 
     const personalInfo = useMemo(() => ({
         name: "Joris Payen",
-        title: "Étudiant en systèmes électroniques et connectés et créateur autodidacte de projets techniques.",
+        title: "Élève en CPGE ATS | Électronique et systèmes embarqués | Alternance 2027",
         phone: "+33 7 87 49 86 86",
         email: "payen.joris.pro@gmail.com",
-        address: "7 rue des cèdres, 69340 Francheville",
-        about: "Créateur autodidacte de projets techniques, je suis convaincu que chaque innovation naît d'une idée claire, d'un plan structuré et d'une bonne dose de passion. En chemin vers le métier d’ingénieur, je suis prêt à m’investir pleinement pour concevoir les technologies électroniques de demain, avec méthode, énergie et ambition."
+        address: "Lyon (69)",
+        about: "Après un BTS CIEL option B, je poursuis mon parcours en classe préparatoire ATS au lycée Édouard Branly. Je recherche une alternance pour intégrer une formation d’ingénieur à la rentrée 2027, avec un intérêt particulier pour l’électronique, les systèmes embarqués et les projets techniques concrets."
     }), []);
 
     const experiences = useMemo(() => ([
         {
-            title: "Auxiliaire de Vie",
-            company: "EHPAD Le Garezin",
-            location: "Francheville",
-            period: "07/2024 - 08/2024",
-            type: "CDD",
+            title: "Technicien contrôleur",
+            company: "PRS Healthcare",
+            location: "Sainte-Foy-lès-Lyon",
+            period: "Mai–août 2025",
+            type: "Stage puis CDD",
             responsibilities: [
-                "Aider les personnes dans les activités quotidiennes telles que se lever/se coucher, toilette et habillage",
+                "Contrôle et diagnostic de sondes échographiques.",
+                "Application de procédures de vérification et analyse des anomalies."
             ]
         },
         {
-            title: "Technicien Controleur",
-            company: "PRS HealthCare",
-            location: "St Foy Lès Lyon",
-            period: "Mai, Juin, Âout 2025",
-            type: "Stage puis CDD",
-            responsibilities: [
-                "Maintenance et expertise de sondes à ultrasons pour l’imagerie médicale : analyse de pannes, mesures électroniques et réparations de précision en environnement biomédical.",
-            ]
-        },
-         {
-            title: "Manager",
-            company: "McDonalds Reloc",
+            title: "Équipier polyvalent puis Manager",
+            company: "McDonald’s",
             location: "Francheville",
-            period: "Actuel Week-end et vacances",
+            period: "2025–2026",
             type: "CDD",
             responsibilities: [
-                "Équipier polyvalent, promu Formateur, puis Manager. Réalisation des taches opérationnelles en service, formation et accompagnment des nouveaux employés, puis gestion et coordination d'une équipe importante.",
+                "Promotion interne au poste de manager.",
+                "Travail d’équipe et responsabilités opérationnelles."
             ]
         },
+        {
+            title: "Auxiliaire de vie",
+            company: "EHPAD Le Garezin",
+            location: "Francheville",
+            period: "Juillet–août 2024",
+            type: "CDD",
+            responsibilities: [
+                "Aide aux résidents et gestion autonome des tâches.",
+                "Vigilance et réactivité au quotidien."
+            ]
+        }
     ] as Experience[]), []);
 
     const project = useMemo(() => ([
         {
-            title: "RC-XD",
-            description: "Conception d’un véhicule connecté capable d’atteindre 20 km/h batisé RC-XD, pilotable via smartphone ou en mode autonome grâce à un système de suivi de ligne. Projet mené en autonomie : conception mécanique, architecture électronique, programmation embarquée et intégration des systèmes de contrôle.",
-            technologies: ["C", "C++", "Python", "Arduino", "Électronique"],
-            image: "/joris/imgs/fpv.png",
+            title: "Véhicule RC FPV — RC-XD",
+            description: "Conception d’un véhicule télécommandé intégrant un pilotage Wi-Fi sur ESP32, une caméra FPV et un système de commande des moteurs. Projet personnel d’intégration électronique et de mise au point d’un système embarqué.",
+            technologies: ["ESP32", "Wi-Fi", "FPV", "Électronique", "Commande moteur"],
             video: "/video/voiture.mp4",
         },
         {
-           title: "Banc de mesure d’inductance industriel",
-           description: "Conception d’un banc de test permettant la mesure rapide et précise de l’inductance de bobines pour Alphée (partenaire de Koenigsegg). Le système intègre électronique de mesure, IHM et acquisition de données avec enregistrement sur PC.",
-           technologies: ["ESP32", "WiFi", "C++", "Réseaux, PCB"],
-           video: "/video/illustation-induct.mp4", 
+            title: "Banc de test d’inductance",
+            description: "Conception d’un banc de mesure d’inductance de bobines dans le cadre d’un projet BTS réalisé en partenariat avec Alphée. Mise en œuvre de compétences en électronique et instrumentation.",
+            technologies: ["Instrumentation", "Mesures électriques", "Électronique", "Banc de test"],
+            video: "/video/illustation-induct.mp4",
         },
-         {
-           title: "Système domotique Jarvis",
-           description: "Développement d’un assistant vocal domotique intelligent capable de contrôler un ordinateur, l’éclairage et divers appareils connectés. Conçu pour interagir à la voix, gérer des rappels et automatiser le quotidien, Jarvis est un système évolutif en amélioration continue, alliant logiciel, électronique et IA.",
-           technologies: ["Next.js", "TypeScript", "Réseaux", "IoT", "TailwindCSS"],
-           image: "/joris/imgs/jarvis.png",
-           video: "/video/jarvis.mp4",
-    }
-
+        {
+            title: "Assistant vocal domotique — Jarvis",
+            description: "Projet d’assistant vocal basé sur Python pour la commande vocale d’équipements connectés. Intégration de fonctions logicielles et expérimentation autour de l’automatisation et de la domotique.",
+            technologies: ["Python", "Assistant vocal", "Domotique", "IoT"],
+            video: "/video/jarvis.mp4",
+        }
     ] as Project[]), []);
 
+    // Affichage descriptif plutôt que pourcentages de maîtrise non vérifiables.
     const skills = useMemo(() => ({
         technical: [
-            { name: "C", level: 85 },
-            { name: "C++", level: 78 },
-            { name: "Python", level: 90 },
-            { name: "Électronique", level: 88 },
-            { name: "Conception de Circuits", level: 80 },
-            { name: "Prototypage", level: 85 },
-            { name: "Soudure", level: 92 },
-            { name: "Réseaux", level: 75 },
-            { name: "Arduino IDE", level: 95 },
-            { name: "Packet Tracer", level: 80 },
-            { name: "Multisim", level: 85 }
+            { name: "Électronique analogique et numérique" },
+            { name: "Instrumentation et mesures électriques" },
+            { name: "Diagnostic de pannes électroniques" },
+            { name: "Conception de systèmes" },
+            { name: "Microcontrôleurs (ESP32)" },
+            { name: "Analyse et débogage de code" }
         ],
-        languages: [
-            { name: "Français", level: 100 },
-            { name: "Anglais B2", level: 80 }
-        ],
-        soft: [
-            { name: "Rigueur et Ponctualité", level: 100 },
-            { name: "Travail en Équipe et Communication", level: 100 },
-            { name: "Adaptabilité", level: 100 },
-            { name: "Pensée Analytique", level: 100 },
-            { name: "Autonomie", level: 100 }
-        ]
+        languages: [{ name: "Anglais : B2" }]
     }), []);
 
     const education = useMemo(() => ({
         institution: "Lycée Édouard Branly",
         location: "Lyon",
-        degree: "BTS CIEL Option B Électronique et Réseaux : Électronique et Réseaux",
-        period: "09/2024 - Présent"
+        degree: "CPGE ATS",
+        period: "2026–2027",
+        previousDegree: "BTS CIEL — option B (Électronique et réseaux)",
+        previousPeriod: "2024–2026"
     }), []);
 
     useEffect(() => {
@@ -459,6 +447,7 @@ const Main: React.FC = () => {
     });
 
     const [formSubmitted, setFormSubmitted] = useState(false);
+    const [formError, setFormError] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     const validateEmail = (email: string): boolean => {
@@ -500,6 +489,8 @@ const Main: React.FC = () => {
 
         if (!newErrors.name && !newErrors.email && !newErrors.subject && !newErrors.message) {
             setIsSubmitting(true);
+            setFormSubmitted(false);
+            setFormError(false);
 
             try {
                 const formDataObj = new FormData();
@@ -519,10 +510,12 @@ const Main: React.FC = () => {
                 if (response.ok) {
                     setFormSubmitted(true);
                     setFormData({ name: '', email: '', subject: '', message: '' });
+                } else {
+                    setFormError(true);
                 }
             } catch (error) {
                 console.error('Erreur lors de l\'envoi du formulaire:', error);
-                setFormSubmitted(true);
+                setFormError(true);
             } finally {
                 setIsSubmitting(false);
             }
@@ -715,11 +708,11 @@ const Main: React.FC = () => {
                             </h2>
                             <div className="hero-cta" style={{ display: "flex", justifyContent: "center", gap: "15px", flexWrap: "wrap" }}>
                                 <button className="btn btn-primary" onClick={() => scrollToSection('projects')}>
-                                    Voir mes Projets
+                                    Voir mes projets
                                 </button>
 
                                 <button className="btn btn-outline" onClick={() => scrollToSection('contact')}>
-                                    Me Contacter
+                                    Me contacter
                                 </button>
 
                                 <a
@@ -748,7 +741,7 @@ const Main: React.FC = () => {
                 <section id="about" ref={sectionRefs.about} className="about-section">
                     <div className="container">
                         <div className="section-header">
-                            <h2 className="section-title animate-text">À Propos de Moi</h2>
+                            <h2 className="section-title animate-text">À propos de moi</h2>
                             <div className="section-divider"></div>
                         </div>
                         <div className="about-content">
@@ -770,6 +763,9 @@ const Main: React.FC = () => {
                                         <h4>{education.degree}</h4>
                                         <h5>{education.institution} | {education.location}</h5>
                                         <p>{education.period}</p>
+                                        <h4 style={{ marginTop: '1rem' }}>{education.previousDegree}</h4>
+                                        <h5>{education.institution} | {education.location}</h5>
+                                        <p>{education.previousPeriod}</p>
                                     </div>
                                 </div>
                             </div>
@@ -793,10 +789,6 @@ const Main: React.FC = () => {
                                         <div key={index} className="skill-item">
                                             <div className="skill-header">
                                                 <span className="skill-name">{skill.name}</span>
-                                                <span className="skill-percentage">{skill.level}%</span>
-                                            </div>
-                                            <div className="skill-bar">
-                                                <div className="skill-progress" data-value={skill.level}></div>
                                             </div>
                                         </div>
                                     ))}
@@ -810,32 +802,12 @@ const Main: React.FC = () => {
                                         <div key={index} className="skill-item">
                                             <div className="skill-header">
                                                 <span className="skill-name">{skill.name}</span>
-                                                <span className="skill-percentage">{skill.level}%</span>
-                                            </div>
-                                            <div className="skill-bar">
-                                                <div className="skill-progress" data-value={skill.level}></div>
                                             </div>
                                         </div>
                                     ))}
                                 </div>
                             </div>
 
-                            <div className="skills-category">
-                                <h3 className="category-title animate-text">Compétences Générales</h3>
-                                <div className="skills-grid">
-                                    {skills.soft.map((skill, index) => (
-                                        <div key={index} className="skill-item">
-                                            <div className="skill-header">
-                                                <span className="skill-name">{skill.name}</span>
-                                                <span className="skill-percentage">{skill.level}%</span>
-                                            </div>
-                                            <div className="skill-bar">
-                                                <div className="skill-progress" data-value={skill.level}></div>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </section>
@@ -907,16 +879,6 @@ const Main: React.FC = () => {
                                                 <span key={i} className="project-tag">{tech}</span>
                                             ))}
                                         </div>
-                                        <div className="project-links">
-                                            <a href="#" className="project-link">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                                    <circle cx="12" cy="12" r="10"></circle>
-                                                    <polyline points="12 16 16 12 12 8"></polyline>
-                                                    <line x1="8" y1="12" x2="16" y2="12"></line>
-                                                </svg>
-                                                Voir les Details
-                                            </a>
-                                        </div>
                                     </div>
                                 </div>
                             ))}
@@ -928,13 +890,13 @@ const Main: React.FC = () => {
                 <section id="contact" ref={sectionRefs.contact} className="contact-section">
                     <div className="container">
                         <div className="section-header">
-                            <h2 className="section-title animate-text">Me Contacter</h2>
+                            <h2 className="section-title animate-text">Me contacter</h2>
                             <div className="section-divider"></div>
                         </div>
 
                         <div className="contact-container">
                             <div className="contact-info">
-                                <h3>Restons en Contact</h3>
+                                <h3>Restons en contact</h3>
                                 <p>N'hésitez pas à me contacter pour toute demande ou collaboration.</p>
 
                                 <div className="contact-details">
@@ -967,7 +929,7 @@ const Main: React.FC = () => {
                                     </div>
 
                                     <div className="contact-item">
-                                        <a href="https://www.google.fr/maps/place/7+Rue+des+C%C3%A8dres,+69340+Francheville/">
+                                        <a href="https://www.google.com/maps/place/Lyon,+France/">
                                             <div className="contact-icon">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                                     <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
@@ -976,7 +938,7 @@ const Main: React.FC = () => {
                                             </div>
                                         </a>
                                         <div className="contact-text">
-                                            <h4>Adresse</h4>
+                                            <h4>Localisation</h4>
                                             <p>{personalInfo.address}</p>
                                         </div>
                                     </div>
@@ -998,24 +960,13 @@ const Main: React.FC = () => {
                                         </svg>
                                     </a>
 
-                                    {/* 🔹 NewGenesis */}
-                                    <a
-                                        href="https://www.newgenesis.ai"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="social-icon"
-                                        aria-label="NewGenesis"
-                                    >
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                            <circle cx="12" cy="12" r="10"></circle>
-                                            <path d="M12 6v6l4 2"></path>
-                                        </svg>
-                                    </a>
                                 </div>
 
                             </div>
 
                             <div className="contact-form">
+                                {formSubmitted && <p role="status">Message envoyé. Merci pour votre prise de contact.</p>}
+                                {formError && <p role="alert">L’envoi a échoué. Vous pouvez me contacter directement par e-mail.</p>}
                                 <form onSubmit={handleSubmit}>
                                     <div className="form-group">
                                         <label htmlFor="name" className="form-label">Votre Nom</label>
@@ -1078,7 +1029,7 @@ const Main: React.FC = () => {
                                     </div>
 
                                     <button type="submit" className="btn btn-primary" disabled={isSubmitting}>
-                                        <span>{isSubmitting ? 'Envoi...' : 'Envoyer le Message'}</span>
+                                        <span>{isSubmitting ? 'Envoi...' : 'Envoyer le message'}</span>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                             <line x1="22" y1="2" x2="11" y2="13"></line>
                                             <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
@@ -1099,7 +1050,7 @@ const Main: React.FC = () => {
                             </div>
                         </div>
                         <div className="footer-bottom">
-                            <p>&copy; {new Date().getFullYear()} <a href="www.newgenesis.ai">NewGenesis</a>. Tous droits réservés.</p>
+                            <p>&copy; {new Date().getFullYear()} Joris Payen. Tous droits réservés.</p>
                         </div>
                     </div>
                     <button

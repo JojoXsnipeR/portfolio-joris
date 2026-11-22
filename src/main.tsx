@@ -36,7 +36,6 @@ const Main: React.FC = () => {
     const [activeSection, setActiveSection] = useState<string>("home");
     const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
-    const [mousePosition, setMousePosition] = useState<{ x: number, y: number }>({ x: 0, y: 0 });
 
     const sectionRefs = {
         home: useRef<HTMLDivElement>(null),
@@ -47,7 +46,6 @@ const Main: React.FC = () => {
         contact: useRef<HTMLDivElement>(null),
     };
 
-    const cursorOuterRef = useRef<HTMLDivElement>(null);
     const headerRef = useRef<HTMLDivElement>(null);
     const introRef = useRef<HTMLDivElement>(null);
     const timelineRef = useRef<gsap.core.Timeline | null>(null);
@@ -148,29 +146,6 @@ const Main: React.FC = () => {
         previousDegree: "BTS CIEL — option B (Électronique et réseaux)",
         previousPeriod: "2024–2026"
     }), []);
-
-    useEffect(() => {
-        const handleMouseMove = (e: MouseEvent) => {
-            setMousePosition({ x: e.clientX, y: e.clientY });
-        };
-
-        window.addEventListener('mousemove', handleMouseMove);
-
-        return () => {
-            window.removeEventListener('mousemove', handleMouseMove);
-        };
-    }, []);
-
-    useEffect(() => {
-        if (cursorOuterRef.current) {
-            gsap.to(cursorOuterRef.current, {
-                x: mousePosition.x,
-                y: mousePosition.y,
-                duration: 1,
-                ease: "power2.out"
-            });
-        }
-    }, [mousePosition]);
 
     useEffect(() => {
         const tl = gsap.timeline();
@@ -523,11 +498,6 @@ const Main: React.FC = () => {
     return (
         <>
 
-
-            {/* Curseur personnalisé */}
-            <div className="cursor">
-                <div ref={cursorOuterRef} className="cursor-outline"></div>
-            </div>
 
             {/* En-tête */}
             <header ref={headerRef} className="header">

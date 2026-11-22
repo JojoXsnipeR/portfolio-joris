@@ -1329,7 +1329,29 @@ canvas {
 }
 .contact-social {
   margin-top: var(--space-xl);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .75rem;
 }
+.contact-cv-link {
+  background: rgba(108, 92, 231, .11);
+}
+.form-alert {
+  padding: .85rem 1rem;
+  color: #f7ced3;
+  background: rgba(231, 76, 60, .1);
+  border: 1px solid rgba(231, 76, 60, .3);
+  border-radius: var(--border-radius-md);
+  line-height: 1.6;
+}
+.form-alert a {
+  color: #d3c9ff;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.form-alert a:hover { color: #fff; }
+
 .contact-social-link {
   display: inline-flex;
   align-items: center;

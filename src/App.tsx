@@ -88,16 +88,7 @@ const App: React.FC = () => {
         </Suspense>
       </AnimatePresence>
 
-      {/* === Ton bouton de CV ici === */}
-      <div style={{ textAlign: "center", marginTop: "40px", marginBottom: "40px" }}>
-        <a
-          href="/CV_Joris_Payen.pdf"
-          download="CV_Joris_Payen.pdf"
-          className="cv-button"
-        >
-          Télécharger mon CV
-        </a>
-      </div>
+
     </HelmetProvider>
 
 

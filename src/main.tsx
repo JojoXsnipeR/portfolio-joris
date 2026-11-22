@@ -4,9 +4,6 @@ import { motion } from "framer-motion";
 import gsap from 'gsap';
 import ScrollTrigger from "gsap/ScrollTrigger";
 import SplitType from 'split-type';
-import { Scene, PerspectiveCamera, WebGLRenderer, AmbientLight, DirectionalLight, Mesh } from 'three';
-import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import './index.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -66,7 +63,7 @@ const Main: React.FC = () => {
 
     const personalInfo = useMemo(() => ({
         name: "Joris Payen",
-        title: "Élève en CPGE ATS | Électronique et systèmes embarqués | Alternance 2027",
+        title: "Élève en CPGE ATS · Futur ingénieur en alternance",
         phone: "+33 7 87 49 86 86",
         email: "payen.joris.pro@gmail.com",
         address: "Lyon (69)",
@@ -312,11 +309,11 @@ const Main: React.FC = () => {
                 ease: "power3.out"
             }, "-=0.7");
 
-            tl.from(".profile-photo", {
-                scale: 0.8,
+            tl.from(".hero-visual", {
+                scale: 0.92,
                 opacity: 0,
-                duration: 1.5,
-                ease: "power3.out(1, 0.5)"
+                duration: 1.2,
+                ease: "power3.out"
             }, "-=1");
 
             tl.from(".social-icons a", {
@@ -403,7 +400,7 @@ const Main: React.FC = () => {
 
     const scrollToSection = useCallback((sectionName: string) => {
         setIsMenuOpen(false);
-        const sectionId = sectionMapping[sectionName];
+        const sectionId = sectionMapping[sectionName] || sectionName;
         const section = sectionRefs[sectionId as keyof typeof sectionRefs]?.current;
 
         if (section) {
@@ -522,120 +519,6 @@ const Main: React.FC = () => {
         }
     };
 
-    const containerRef = useRef<HTMLDivElement>(null);
-    const sceneRef = useRef<Scene | null>(null);
-    const modelRef = useRef<any>(null);
-    const rendererRef = useRef<WebGLRenderer | null>(null);
-    const cameraRef = useRef<PerspectiveCamera | null>(null);
-
-    useEffect(() => {
-        gsap.registerPlugin(ScrollTrigger);
-
-        const scene = new Scene();
-        sceneRef.current = scene;
-
-        const camera = new PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
-        camera.position.set(-.15, -1, 3);
-        cameraRef.current = camera;
-
-        const renderer = new WebGLRenderer({ alpha: true, antialias: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setClearColor(0xffffff, 0);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-        rendererRef.current = renderer;
-
-        if (containerRef.current) {
-            const existingCanvas = containerRef.current.querySelector('canvas');
-            if (existingCanvas) {
-                existingCanvas.remove();
-            }
-            containerRef.current.appendChild(renderer.domElement);
-        }
-
-        const ambientLight = new AmbientLight(0x404040, 1);
-        scene.add(ambientLight);
-
-        const directionalLight = new DirectionalLight(0xffffff, 1);
-        directionalLight.position.set(10, 10, 5);
-        scene.add(directionalLight);
-
-        const dracoLoader = new DRACOLoader();
-        dracoLoader.setDecoderPath('https://www.gstatic.com/draco/v1/decoders/');
-        const loader = new GLTFLoader();
-        loader.setDRACOLoader(dracoLoader);
-
-        const gltfPath = '/env/car.glb';
-
-        loader.load(gltfPath, (gltf: any) => {
-            const model = gltf.scene;
-
-            const updateModelTransform = () => {
-                if (window.innerWidth < 769) {
-                    model.position.set(-.1, -1.2, 0);
-                    model.scale.set(2, 2, 2);
-                }
-                else if (window.innerWidth < 1100) {
-                    model.position.set(-0.5, -.6, 0);
-                    model.scale.set(4, 4, 4);
-                } else {
-                    model.position.set(-1, -.6, 0);
-                    model.scale.set(4, 4, 4);
-                }
-            };
-
-            updateModelTransform();
-
-            model.rotation.set(0, -Math.PI / 1.3, 0);
-            modelRef.current = model;
-
-            model.traverse((child: any) => {
-                if (child instanceof Mesh) {
-                    child.castShadow = true;
-                    child.receiveShadow = true;
-                }
-            });
-
-            scene.add(model);
-
-            window.addEventListener('resize', updateModelTransform);
-        });
-
-        const animate = () => {
-            requestAnimationFrame(animate);
-            if (rendererRef.current && sceneRef.current && cameraRef.current) {
-                rendererRef.current.render(sceneRef.current, cameraRef.current);
-            }
-        };
-        animate();
-
-        const handleResize = () => {
-            if (cameraRef.current && rendererRef.current) {
-                cameraRef.current.aspect = window.innerWidth / window.innerHeight;
-                cameraRef.current.updateProjectionMatrix();
-                rendererRef.current.setSize(window.innerWidth, window.innerHeight);
-
-                if (modelRef.current) {
-                    const scaleFactor = window.innerWidth < 768 ? 2.5 : 4;
-                    modelRef.current.scale.set(scaleFactor, scaleFactor, scaleFactor);
-                }
-            }
-        };
-
-        window.addEventListener('resize', handleResize);
-
-        renderer.domElement.style.position = 'absolute';
-        renderer.domElement.style.top = '0';
-        renderer.domElement.style.left = '0';
-        renderer.domElement.style.zIndex = '-1';
-
-        return () => {
-            window.removeEventListener('resize', handleResize);
-            ScrollTrigger.getAll().forEach(t => t.kill());
-            if (rendererRef.current) {
-                rendererRef.current.dispose();
-            }
-        };
-    }, []);
 
     return (
         <>
@@ -657,10 +540,10 @@ const Main: React.FC = () => {
                             {['accueil', 'à propos', 'compétences', 'expérience', 'projets', 'contact'].map((section) => (
                                 <li key={section} className="nav-item">
                                     <button
-                                        className={`nav-link ${activeSection === section ? 'active' : ''}`}
+                                        className={`nav-link ${activeSection === sectionMapping[section] ? 'active' : ''}`}
                                         onClick={() => {
                                             scrollToSection(section);
-                                            setActiveSection(section);
+                                            setActiveSection(sectionMapping[section]);
                                         }}
                                     >
                                         {section.charAt(0).toUpperCase() + section.slice(1)}
@@ -691,43 +574,34 @@ const Main: React.FC = () => {
                 data-mouse="0.11"
                 data-strength="0.36"
                 data-relaxation="0.96">
-                {/* Section Héro */}
-                <div
-                    ref={containerRef}
-                    style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
-                />
+                {/* Accueil : portrait professionnel à intégrer lors de la passe finale */}
                 <section id="home" ref={sectionRefs.home} className="hero-section">
-                    <div className="parallax-bg"></div>
+                    <div className="parallax-bg" aria-hidden="true"></div>
                     <div className="container hero-container">
                         <div className="hero-content">
-                            <h1 className="hero-title animate-text">
-                                {personalInfo.name}
-                            </h1>
-                            <h2 className="hero-subtitle animate-text">
-                                {personalInfo.title}
-                            </h2>
-                            <div className="hero-cta" style={{ display: "flex", justifyContent: "center", gap: "15px", flexWrap: "wrap" }}>
+                            <p className="hero-eyebrow">ÉLECTRONIQUE · SYSTÈMES EMBARQUÉS</p>
+                            <h1 className="hero-title animate-text">{personalInfo.name}</h1>
+                            <h2 className="hero-subtitle animate-text">{personalInfo.title}</h2>
+                            <p className="hero-description">
+                                Recherche d’une alternance pour intégrer une formation d’ingénieur à la rentrée 2027.
+                                Conception, électronique et projets techniques concrets.
+                            </p>
+                            <div className="hero-cta">
                                 <button className="btn btn-primary" onClick={() => scrollToSection('projects')}>
                                     Voir mes projets
                                 </button>
-
+                                <a href="/CV_Joris_Payen.pdf" download="CV_Joris_Payen.pdf" className="btn btn-secondary">
+                                    Télécharger mon CV
+                                </a>
                                 <button className="btn btn-outline" onClick={() => scrollToSection('contact')}>
                                     Me contacter
                                 </button>
-
-                                <a
-                                    href="/CV_Joris_Payen.pdf"
-                                    download="CV_Joris_Payen.pdf"
-                                    className="btn btn-secondary"
-                                >
-                                    Télécharger mon CV
-                                </a>
                             </div>
                         </div>
-                        <div className="profile-photo-container">
-                            <div className="profile-photo">
-                                <div className="photo-outline"></div>
-                                <div className="photo-glow"></div>
+                        <div className="hero-visual" aria-hidden="true">
+                            <div className="hero-visual-frame">
+                                <span className="hero-visual-chip">JP</span>
+                                <div className="hero-visual-caption">CONCEVOIR <span>·</span> TESTER <span>·</span> COMPRENDRE</div>
                             </div>
                         </div>
                     </div>
@@ -1054,10 +928,10 @@ const Main: React.FC = () => {
                         </div>
                     </div>
                     <button
-                        className={`back-to-top ${activeSection !== 'accueil' ? 'visible' : ''}`}
+                        className={`back-to-top ${activeSection !== 'home' ? 'visible' : ''}`}
                         onClick={() => {
                             scrollToSection('accueil');
-                            setActiveSection('accueil');
+                            setActiveSection('home');
                         }}
                         aria-label="Retour en haut"
                     >

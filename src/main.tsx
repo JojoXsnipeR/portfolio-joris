@@ -636,7 +636,7 @@ const Main: React.FC = () => {
                             {projects.map((project, index) => (
                                 <article key={project.title} className="project-card">
                                     <div className="project-image">
-                                        <video src={project.video} className="project-media" controls playsInline preload="metadata" aria-label={`Vidéo du projet ${project.title}`}>
+                                        <video src={project.video} className="project-media" autoPlay muted loop playsInline preload="metadata" aria-label={`Vidéo de démonstration du projet ${project.title} (muette et en boucle)`}>
                                             Votre navigateur ne prend pas en charge la lecture vidéo.
                                         </video>
                                     </div>

@@ -270,13 +270,6 @@ const Main: React.FC = () => {
                 ease: "power3.out"
             }, "-=1");
 
-            tl.from(".social-icons a", {
-                opacity: 0,
-                y: 20,
-                stagger: 0.1,
-                duration: 0.8,
-                ease: "back.out(1.7)"
-            }, "-=1");
         };
 
         const timer = setTimeout(() => {
@@ -524,7 +517,7 @@ const Main: React.FC = () => {
                                 <button className="btn btn-primary" onClick={() => scrollToSection('projects')}>
                                     Voir mes projets
                                 </button>
-                                <a href="/CV_Joris_Payen.pdf" download="CV_Joris_Payen.pdf" className="btn btn-secondary">
+                                <a href="/CV_Joris_Payen.pdf?v=20261122" download="CV_Joris_Payen.pdf" className="btn btn-secondary">
                                     Télécharger mon CV
                                 </a>
                                 <button className="btn btn-outline" onClick={() => scrollToSection('contact')}>
@@ -534,7 +527,15 @@ const Main: React.FC = () => {
                         </div>
                         <div className="hero-visual" aria-hidden="true">
                             <div className="hero-visual-frame">
-                                <span className="hero-visual-chip">JP</span>
+                                <span className="hero-visual-chip">
+                                    <span className="hero-visual-fallback">JP</span>
+                                    <img src="/portrait-joris.webp"
+                                         alt=""
+                                         className="hero-visual-photo"
+                                         loading="eager"
+                                         decoding="async"
+                                         onError={(event) => { event.currentTarget.style.display = 'none'; }} />
+                                </span>
                                 <div className="hero-visual-caption">CONCEVOIR <span>·</span> TESTER <span>·</span> COMPRENDRE</div>
                             </div>
                         </div>

@@ -550,7 +550,7 @@ const Main: React.FC = () => {
                     <div className="container hero-container">
                         <div className="hero-content">
                             <p className="hero-eyebrow">ÉLECTRONIQUE · SYSTÈMES EMBARQUÉS</p>
-                            <h1 className="hero-title animate-text">{personalInfo.name}</h1>
+                            <h1 className="hero-title">{personalInfo.name}</h1>
                             <h2 className="hero-subtitle animate-text">{personalInfo.title}</h2>
                             <p className="hero-description">
                                 Recherche d’une alternance pour intégrer une formation d’ingénieur à la rentrée 2027.

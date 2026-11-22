@@ -65,7 +65,7 @@ const Main: React.FC = () => {
         phone: "+33 7 87 49 86 86",
         email: "payen.joris.pro@gmail.com",
         address: "Lyon (69)",
-        about: "Après un BTS CIEL option B, je poursuis mon parcours en classe préparatoire ATS au lycée Édouard Branly. Je recherche une alternance pour intégrer une formation d’ingénieur à la rentrée 2027, avec un intérêt particulier pour l’électronique, les systèmes embarqués et les projets techniques concrets."
+        about: "Après un BTS CIEL option B en électronique et réseaux, j’ai choisi la prépa ATS pour poursuivre vers une école d’ingénieurs. J’aime comprendre comment fonctionne un système, rechercher l’origine d’une panne et transformer une idée en prototype. Je recherche une alternance à partir de septembre 2027, notamment en électronique et systèmes embarqués."
     }), []);
 
     const experiences = useMemo(() => ([
@@ -81,14 +81,14 @@ const Main: React.FC = () => {
             ]
         },
         {
-            title: "Équipier polyvalent puis Manager",
+            title: "Équipier polyvalent → Formateur → Manager",
             company: "McDonald’s",
             location: "Francheville",
             period: "2025–2026",
             type: "CDD",
             responsibilities: [
-                "Promotion interne au poste de manager.",
-                "Travail d’équipe et responsabilités opérationnelles."
+                "Évolution interne jusqu’au poste de manager.",
+                "Formation des nouveaux équipiers et coordination des opérations en service."
             ]
         },
         {
@@ -560,21 +560,24 @@ const Main: React.FC = () => {
                             </div>
                             <div className="about-education">
                                 <h3 className="animate-text">Formation</h3>
-                                <div className="education-card">
-                                    <div className="education-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                            <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
-                                            <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
-                                        </svg>
-                                    </div>
-                                    <div className="education-details">
-                                        <h4>{education.degree}</h4>
-                                        <h5>{education.institution} | {education.location}</h5>
-                                        <p>{education.period}</p>
-                                        <h4 style={{ marginTop: '1rem' }}>{education.previousDegree}</h4>
-                                        <h5>{education.institution} | {education.location}</h5>
-                                        <p>{education.previousPeriod}</p>
-                                    </div>
+                                <div className="education-list">
+                                    <article className="education-item education-item-current">
+                                        <div className="education-item-top">
+                                            <span className="education-period">{education.period}</span>
+                                            <span className="education-status">En cours</span>
+                                        </div>
+                                        <h4>{education.degree} — Adaptation Technicien Supérieur</h4>
+                                        <p>{education.institution} · {education.location}</p>
+                                        <p className="education-caption">Année préparatoire aux écoles d’ingénieurs.</p>
+                                    </article>
+                                    <article className="education-item">
+                                        <div className="education-item-top">
+                                            <span className="education-period">{education.previousPeriod}</span>
+                                        </div>
+                                        <h4>{education.previousDegree}</h4>
+                                        <p>{education.institution} · {education.location}</p>
+                                        <p className="education-caption">Électronique et réseaux.</p>
+                                    </article>
                                 </div>
                             </div>
                         </div>
@@ -603,7 +606,7 @@ const Main: React.FC = () => {
                 <section id="experience" ref={sectionRefs.experience} className="experience-section">
                     <div className="container">
                         <div className="section-header">
-                            <h2 className="section-title animate-text">Expérience</h2>
+                            <h2 className="section-title animate-text">Expériences professionnelles</h2>
                             <div className="section-divider"></div>
                         </div>
 
@@ -671,76 +674,44 @@ const Main: React.FC = () => {
 
                         <div className="contact-container">
                             <div className="contact-info">
-                                <h3>Restons en contact</h3>
-                                <p>N'hésitez pas à me contacter pour toute demande ou collaboration.</p>
+                                <span className="contact-availability">Recherche d’alternance · Septembre 2027</span>
+                                <h3>Échangeons sur vos projets</h3>
+                                <p>Je recherche une entreprise pour une alternance en école d’ingénieurs, avec une orientation électronique et systèmes embarqués. Vous pouvez me joindre directement :</p>
 
                                 <div className="contact-details">
-                                    <div className="contact-item">
-                                        <a href="tel:+33787498686">
-                                            <div className="contact-icon">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-                                                </svg>
-                                            </div>
-                                        </a>
-                                        <div className="contact-text">
-                                            <h4>Téléphone</h4>
-                                            <p>{personalInfo.phone}</p>
+                                    <a className="contact-item contact-clickable" href="mailto:payen.joris.pro@gmail.com" aria-label="Envoyer un e-mail à Joris Payen">
+                                        <div className="contact-icon" aria-hidden="true">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m2 6 10 7 10-7"></path></svg>
                                         </div>
-                                    </div>
-                                    <div className="contact-item">
-                                        <a href="mailto:payen.joris.pro@gmail.com">
-                                            <div className="contact-icon">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                                                    <polyline points="22,6 12,13 2,6"></polyline>
-                                                </svg>
-                                            </div>
-                                        </a>
-                                        <div className="contact-text">
-                                            <h4>Email</h4>
-                                            <p>{personalInfo.email}</p>
+                                        <div className="contact-text"><h4>Email</h4><p>{personalInfo.email}</p></div>
+                                    </a>
+                                    <a className="contact-item contact-clickable" href="tel:+33787498686" aria-label="Appeler Joris Payen">
+                                        <div className="contact-icon" aria-hidden="true">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72l.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
                                         </div>
-                                    </div>
-
-                                    <div className="contact-item">
-                                        <a href="https://www.google.com/maps/place/Lyon,+France/">
-                                            <div className="contact-icon">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                                                    <circle cx="12" cy="10" r="3"></circle>
-                                                </svg>
-                                            </div>
-                                        </a>
-                                        <div className="contact-text">
-                                            <h4>Localisation</h4>
-                                            <p>{personalInfo.address}</p>
+                                        <div className="contact-text"><h4>Téléphone</h4><p>{personalInfo.phone}</p></div>
+                                    </a>
+                                    <div className="contact-item contact-item-location">
+                                        <div className="contact-icon" aria-hidden="true">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
                                         </div>
+                                        <div className="contact-text"><h4>Localisation</h4><p>{personalInfo.address}</p></div>
                                     </div>
                                 </div>
 
-                                <div className="social-icons">
-                                    {/* 🔹 LinkedIn */}
-                                    <a
-                                        href="https://www.linkedin.com/in/joris-payen-19b747395/"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="social-icon"
-                                        aria-label="LinkedIn"
-                                    >
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                                            <rect x="2" y="9" width="4" height="12"></rect>
-                                            <circle cx="4" cy="4" r="2"></circle>
-                                        </svg>
+                                <div className="contact-social">
+                                    <a href="https://www.linkedin.com/in/joris-payen-19b747395/"
+                                       target="_blank" rel="noopener noreferrer" className="contact-social-link">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.35V9h3.414v1.561h.049c.476-.9 1.637-1.85 3.37-1.85 3.6 0 4.265 2.37 4.265 5.455v6.286zM5.337 7.433a2.063 2.063 0 1 1 0-4.127 2.063 2.063 0 0 1 0 4.127zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .775 0 1.729v20.542C0 23.225.792 24 1.771 24h20.451C23.2 24 24 23.225 24 22.271V1.729C24 .775 23.2 0 22.225 0z"></path></svg>
+                                        <span>Retrouver mon profil LinkedIn</span>
+                                        <span aria-hidden="true">↗</span>
                                     </a>
-
                                 </div>
 
                             </div>
 
                             <div className="contact-form">
-                                {formSubmitted && <p role="status">Message envoyé. Merci pour votre prise de contact.</p>}
+                                {formSubmitted && <p role="status">Votre demande a été transmise au service d’envoi. Merci pour votre message.</p>}
                                 {formError && <p role="alert">L’envoi a échoué. Vous pouvez me contacter directement par e-mail.</p>}
                                 <form onSubmit={handleSubmit}>
                                     <div className="form-group">

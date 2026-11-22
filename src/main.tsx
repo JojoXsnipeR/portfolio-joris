@@ -104,39 +104,18 @@ const Main: React.FC = () => {
         }
     ] as Experience[]), []);
 
-    const project = useMemo(() => ([
-        {
-            title: "Véhicule RC FPV — RC-XD",
-            description: "Conception d’un véhicule télécommandé intégrant un pilotage Wi-Fi sur ESP32, une caméra FPV et un système de commande des moteurs. Projet personnel d’intégration électronique et de mise au point d’un système embarqué.",
-            technologies: ["ESP32", "Wi-Fi", "FPV", "Électronique", "Commande moteur"],
-            video: "/video/voiture.mp4",
-        },
-        {
-            title: "Banc de test d’inductance",
-            description: "Conception d’un banc de mesure d’inductance de bobines dans le cadre d’un projet BTS réalisé en partenariat avec Alphée. Mise en œuvre de compétences en électronique et instrumentation.",
-            technologies: ["Instrumentation", "Mesures électriques", "Électronique", "Banc de test"],
-            video: "/video/illustation-induct.mp4",
-        },
-        {
-            title: "Assistant vocal domotique — Jarvis",
-            description: "Projet d’assistant vocal basé sur Python pour la commande vocale d’équipements connectés. Intégration de fonctions logicielles et expérimentation autour de l’automatisation et de la domotique.",
-            technologies: ["Python", "Assistant vocal", "Domotique", "IoT"],
-            video: "/video/jarvis.mp4",
-        }
-    ] as Project[]), []);
+    const projects = useMemo(() => ([
+        {title:"RC-XD — Véhicule connecté FPV",kind:"Projet personnel",description:"Un véhicule télécommandé pensé autour d’un ESP32, du pilotage Wi-Fi et du retour vidéo FPV.",technologies:["ESP32","Wi-Fi","FPV","Commande moteur"],video:"/video/voiture.mp4",objective:"Associer pilotage depuis un smartphone, retour caméra et commande des moteurs.",implementation:"Architecture ESP32, électronique de commande et intégration d’une caméra FPV.",technicalFocus:"Intégration matérielle, communication et mise au point des commandes."},
+        {title:"Banc de mesure d’inductance",kind:"Projet BTS · Partenariat Alphée",description:"Conception d’un banc destiné à mesurer l’inductance de bobines dans le cadre d’un projet BTS réalisé avec Alphée.",technologies:["Instrumentation","Mesures électriques","Électronique","Banc de test"],video:"/video/illustation-induct.mp4",objective:"Faciliter la mesure et le contrôle d’inductances au moyen d’un dispositif dédié.",implementation:"Étude de la chaîne de mesure et de l’électronique associée au banc.",technicalFocus:"Méthode de test, instrumentation et contraintes pratiques de mesure."},
+        {title:"Jarvis — Assistant vocal domotique",kind:"Projet personnel",description:"Expérimentation d’un assistant vocal basé sur Python pour interagir avec des fonctions informatiques et domotiques.",technologies:["Python","Commande vocale","Automatisation","IoT"],video:"/video/jarvis.mp4",objective:"Explorer le pilotage d’actions numériques et d’équipements par la voix.",implementation:"Assemblage de composants logiciels Python et logique de traitement des commandes.",technicalFocus:"Compréhension, débogage et amélioration progressive d’un prototype."}
+    ]), []);
 
-    // Affichage descriptif plutôt que pourcentages de maîtrise non vérifiables.
-    const skills = useMemo(() => ({
-        technical: [
-            { name: "Électronique analogique et numérique" },
-            { name: "Instrumentation et mesures électriques" },
-            { name: "Diagnostic de pannes électroniques" },
-            { name: "Conception de systèmes" },
-            { name: "Microcontrôleurs (ESP32)" },
-            { name: "Analyse et débogage de code" }
-        ],
-        languages: [{ name: "Anglais : B2" }]
-    }), []);
+    const skillGroups = useMemo(() => ([
+        {number:"01",title:"Électronique & conception",description:"Comprendre, assembler et mettre au point un système.",topics:["Électronique analogique et numérique","Conception de montages","Lecture de schémas et prototypage"]},
+        {number:"02",title:"Instrumentation & diagnostic",description:"Mesurer, vérifier et chercher l’origine d’une anomalie.",topics:["Mesures électriques","Contrôle de sondes échographiques","Procédures de test et diagnostic"]},
+        {number:"03",title:"Systèmes embarqués",description:"Faire fonctionner ensemble matériel, commande et communication.",topics:["Microcontrôleurs ESP32","Intégration de capteurs et actionneurs","Wi-Fi et systèmes connectés"]},
+        {number:"04",title:"Développement & outils",description:"Lire, adapter et déboguer des programmes utilisés dans les projets.",topics:["Bases en Python et C/C++","Analyse et débogage de code","Arduino IDE et outils de simulation"]}
+    ]), []);
 
     const education = useMemo(() => ({
         institution: "Lycée Édouard Branly",
@@ -305,21 +284,6 @@ const Main: React.FC = () => {
             splitTextElements();
             splitTextElements2();
             animateSections();
-
-            gsap.utils.toArray<HTMLElement>('.skill-progress').forEach((bar) => {
-                const value = parseInt(bar.getAttribute('data-value') || '0');
-
-                gsap.to(bar, {
-                    width: `${value}%`,
-                    duration: .25,
-                    ease: "power2.out",
-                    scrollTrigger: {
-                        trigger: bar,
-                        start: "top 90%",
-                        toggleActions: "play none none none"
-                    }
-                });
-            });
 
             gsap.utils.toArray<HTMLElement>('.timeline-item').forEach((item, i) => {
                 gsap.from(item, {
@@ -617,42 +581,21 @@ const Main: React.FC = () => {
                     </div>
                 </section>
 
-                {/* Section Compétences */}
+                {/* Compétences structurées, sans pourcentages subjectifs */}
                 <section id="skills" ref={sectionRefs.skills} className="skills-section">
                     <div className="container">
-                        <div className="section-header">
-                            <h2 className="section-title animate-text">Compétences</h2>
-                            <div className="section-divider"></div>
+                        <div className="section-header"><h2 className="section-title animate-text">Compétences</h2><div className="section-divider"></div></div>
+                        <p className="skills-intro">Des compétences construites en BTS CIEL, en entreprise et au travers de projets personnels.</p>
+                        <div className="skill-groups-grid">
+                            {skillGroups.map(group => (
+                                <article key={group.number} className="skill-group-card">
+                                    <div className="skill-group-heading"><span className="skill-group-number" aria-hidden="true">{group.number}</span><h3>{group.title}</h3></div>
+                                    <p className="skill-group-description">{group.description}</p>
+                                    <ul className="skill-topic-list">{group.topics.map(topic => <li key={topic}>{topic}</li>)}</ul>
+                                </article>
+                            ))}
                         </div>
-
-                        <div className="skills-container">
-                            <div className="skills-category">
-                                <h3 className="category-title animate-text">Compétences Techniques</h3>
-                                <div className="skills-grid">
-                                    {skills.technical.map((skill, index) => (
-                                        <div key={index} className="skill-item">
-                                            <div className="skill-header">
-                                                <span className="skill-name">{skill.name}</span>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-
-                            <div className="skills-category">
-                                <h3 className="category-title animate-text">Langues</h3>
-                                <div className="skills-grid">
-                                    {skills.languages.map((skill, index) => (
-                                        <div key={index} className="skill-item">
-                                            <div className="skill-header">
-                                                <span className="skill-name">{skill.name}</span>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-
-                        </div>
+                        <div className="language-strip"><strong>Langues</strong><span>Français · langue maternelle</span><span>Anglais · niveau B2</span></div>
                     </div>
                 </section>
 
@@ -684,49 +627,37 @@ const Main: React.FC = () => {
                     </div>
                 </section>
 
-                {/* Section Projets */}
+                {/* Projets : vidéo à la demande et démarche technique */}
                 <section id="projects" ref={sectionRefs.projects} className="projects-section">
                     <div className="container">
-                        <div className="section-header">
-                            <h2 className="section-title animate-text">Mes Projets</h2>
-                            <div className="section-divider"></div>
-                        </div>
-
+                        <div className="section-header"><h2 className="section-title animate-text">Mes projets</h2><div className="section-divider"></div></div>
+                        <p className="projects-intro">Trois réalisations pour montrer ma démarche : partir d’un besoin, concevoir un système et le mettre à l’épreuve.</p>
                         <div className="projects-grid">
-                            {project.map((project, index) => (
-                                <div key={index} className="project-card">
+                            {projects.map((project, index) => (
+                                <article key={project.title} className="project-card">
                                     <div className="project-image">
-                                        {project.video ? (
-                                            <video
-                                                autoPlay
-                                                muted
-                                                loop
-                                                playsInline
-                                                src={project.video}
-                                                className="project-media"
-                                            ></video>
-                                        ) : project.image ? (
-                                            <img
-                                                src={project.image}
-                                                alt={project.title}
-                                                className="project-media"
-                                            />
-                                        ) : (
-                                            <div className="project-placeholder"></div>
-                                        )}
+                                        <video src={project.video} className="project-media" controls playsInline preload="metadata" aria-label={`Vidéo du projet ${project.title}`}>
+                                            Votre navigateur ne prend pas en charge la lecture vidéo.
+                                        </video>
                                     </div>
                                     <div className="project-content">
+                                        <div className="project-meta"><span className="project-index">{String(index + 1).padStart(2, '0')} / 03</span><span className="project-kind">{project.kind}</span></div>
                                         <h3 className="project-title">{project.title}</h3>
                                         <p className="project-description">{project.description}</p>
-                                        <div className="project-tags">
-                                            {project.technologies.map((tech, i) => (
-                                                <span key={i} className="project-tag">{tech}</span>
-                                            ))}
-                                        </div>
+                                        <div className="project-tags">{project.technologies.map(tech => <span key={tech} className="project-tag">{tech}</span>)}</div>
+                                        <details className="project-details">
+                                            <summary>Découvrir la démarche <span aria-hidden="true" className="project-details-icon">+</span></summary>
+                                            <div className="project-details-content">
+                                                <h4>Objectif</h4><p>{project.objective}</p>
+                                                <h4>Mise en œuvre</h4><p>{project.implementation}</p>
+                                                <h4>Points techniques</h4><p>{project.technicalFocus}</p>
+                                            </div>
+                                        </details>
                                     </div>
-                                </div>
+                                </article>
                             ))}
                         </div>
+                        <p className="projects-outro">Les vidéos illustrent mes travaux. Les détails techniques peuvent être approfondis lors d’un échange.</p>
                     </div>
                 </section>
 

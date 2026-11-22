@@ -4,9 +4,6 @@ import { motion } from "framer-motion";
 import gsap from 'gsap';
 import ScrollTrigger from "gsap/ScrollTrigger";
 import SplitType from 'split-type';
-import { Scene, PerspectiveCamera, WebGLRenderer, AmbientLight, DirectionalLight, Mesh } from 'three';
-import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import './index.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -39,7 +36,6 @@ const Main: React.FC = () => {
     const [activeSection, setActiveSection] = useState<string>("home");
     const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
-    const [mousePosition, setMousePosition] = useState<{ x: number, y: number }>({ x: 0, y: 0 });
 
     const sectionRefs = {
         home: useRef<HTMLDivElement>(null),
@@ -50,7 +46,6 @@ const Main: React.FC = () => {
         contact: useRef<HTMLDivElement>(null),
     };
 
-    const cursorOuterRef = useRef<HTMLDivElement>(null);
     const headerRef = useRef<HTMLDivElement>(null);
     const introRef = useRef<HTMLDivElement>(null);
     const timelineRef = useRef<gsap.core.Timeline | null>(null);
@@ -66,126 +61,70 @@ const Main: React.FC = () => {
 
     const personalInfo = useMemo(() => ({
         name: "Joris Payen",
-        title: "Étudiant en systèmes électroniques et connectés et créateur autodidacte de projets techniques.",
+        title: "Élève en CPGE ATS",
         phone: "+33 7 87 49 86 86",
         email: "payen.joris.pro@gmail.com",
-        address: "7 rue des cèdres, 69340 Francheville",
-        about: "Créateur autodidacte de projets techniques, je suis convaincu que chaque innovation naît d'une idée claire, d'un plan structuré et d'une bonne dose de passion. En chemin vers le métier d’ingénieur, je suis prêt à m’investir pleinement pour concevoir les technologies électroniques de demain, avec méthode, énergie et ambition."
+        address: "Lyon (69)",
+        about: "Après un BTS CIEL option B en électronique et réseaux, j’ai choisi la prépa ATS pour poursuivre vers une école d’ingénieurs. J’aime comprendre comment fonctionne un système, rechercher l’origine d’une panne et transformer une idée en prototype. Je recherche une alternance à partir de septembre 2027, notamment en électronique et systèmes embarqués."
     }), []);
 
     const experiences = useMemo(() => ([
         {
-            title: "Auxiliaire de Vie",
-            company: "EHPAD Le Garezin",
-            location: "Francheville",
-            period: "07/2024 - 08/2024",
-            type: "CDD",
-            responsibilities: [
-                "Aider les personnes dans les activités quotidiennes telles que se lever/se coucher, toilette et habillage",
-            ]
-        },
-        {
-            title: "Technicien Controleur",
-            company: "PRS HealthCare",
-            location: "St Foy Lès Lyon",
-            period: "Mai, Juin, Âout 2025",
+            title: "Technicien contrôleur",
+            company: "PRS Healthcare",
+            location: "Sainte-Foy-lès-Lyon",
+            period: "Mai–août 2025",
             type: "Stage puis CDD",
             responsibilities: [
-                "Maintenance et expertise de sondes à ultrasons pour l’imagerie médicale : analyse de pannes, mesures électroniques et réparations de précision en environnement biomédical.",
+                "Contrôle et diagnostic de sondes échographiques.",
+                "Application de procédures de vérification et analyse des anomalies."
             ]
         },
-         {
-            title: "Manager",
-            company: "McDonalds Reloc",
+        {
+            title: "Équipier polyvalent → Formateur → Manager",
+            company: "McDonald’s",
             location: "Francheville",
-            period: "Actuel Week-end et vacances",
+            period: "2025–2026",
             type: "CDD",
             responsibilities: [
-                "Équipier polyvalent, promu Formateur, puis Manager. Réalisation des taches opérationnelles en service, formation et accompagnment des nouveaux employés, puis gestion et coordination d'une équipe importante.",
+                "Évolution interne jusqu’au poste de manager.",
+                "Formation des nouveaux équipiers et coordination des opérations en service."
             ]
         },
+        {
+            title: "Auxiliaire de vie",
+            company: "EHPAD Le Gareizin",
+            location: "Francheville",
+            period: "Juillet–août 2024",
+            type: "CDD",
+            responsibilities: [
+                "Aide aux résidents et gestion autonome des tâches.",
+                "Vigilance et réactivité au quotidien."
+            ]
+        }
     ] as Experience[]), []);
 
-    const project = useMemo(() => ([
-        {
-            title: "RC-XD",
-            description: "Conception d’un véhicule connecté capable d’atteindre 20 km/h batisé RC-XD, pilotable via smartphone ou en mode autonome grâce à un système de suivi de ligne. Projet mené en autonomie : conception mécanique, architecture électronique, programmation embarquée et intégration des systèmes de contrôle.",
-            technologies: ["C", "C++", "Python", "Arduino", "Électronique"],
-            image: "/joris/imgs/fpv.png",
-            video: "/video/voiture.mp4",
-        },
-        {
-           title: "Banc de mesure d’inductance industriel",
-           description: "Conception d’un banc de test permettant la mesure rapide et précise de l’inductance de bobines pour Alphée (partenaire de Koenigsegg). Le système intègre électronique de mesure, IHM et acquisition de données avec enregistrement sur PC.",
-           technologies: ["ESP32", "WiFi", "C++", "Réseaux, PCB"],
-           video: "/video/illustation-induct.mp4", 
-        },
-         {
-           title: "Système domotique Jarvis",
-           description: "Développement d’un assistant vocal domotique intelligent capable de contrôler un ordinateur, l’éclairage et divers appareils connectés. Conçu pour interagir à la voix, gérer des rappels et automatiser le quotidien, Jarvis est un système évolutif en amélioration continue, alliant logiciel, électronique et IA.",
-           technologies: ["Next.js", "TypeScript", "Réseaux", "IoT", "TailwindCSS"],
-           image: "/joris/imgs/jarvis.png",
-           video: "/video/jarvis.mp4",
-    }
+    const projects = useMemo(() => ([
+        {title:"RC-XD — Véhicule connecté FPV",kind:"Projet personnel",description:"Un véhicule télécommandé pensé autour d’un ESP32, du pilotage Wi-Fi et du retour vidéo FPV.",technologies:["ESP32","Wi-Fi","FPV","Commande moteur"],video:"/video/voiture.mp4",objective:"Associer pilotage depuis un smartphone, retour caméra et commande des moteurs.",implementation:"Architecture ESP32, électronique de commande et intégration d’une caméra FPV.",technicalFocus:"Intégration matérielle, communication et mise au point des commandes."},
+        {title:"Banc de mesure d’inductance",kind:"Projet BTS · Partenariat Alphée",description:"Conception d’un banc destiné à mesurer l’inductance de bobines dans le cadre d’un projet BTS réalisé avec Alphée.",technologies:["Instrumentation","Mesures électriques","Électronique","Banc de test"],video:"/video/illustation-induct.mp4",objective:"Faciliter la mesure et le contrôle d’inductances au moyen d’un dispositif dédié.",implementation:"Étude de la chaîne de mesure et de l’électronique associée au banc.",technicalFocus:"Méthode de test, instrumentation et contraintes pratiques de mesure."},
+        {title:"Jarvis — Assistant vocal domotique",kind:"Projet personnel",description:"Expérimentation d’un assistant vocal basé sur Python pour interagir avec des fonctions informatiques et domotiques.",technologies:["Python","Commande vocale","Automatisation","IoT"],video:"/video/jarvis.mp4",objective:"Explorer le pilotage d’actions numériques et d’équipements par la voix.",implementation:"Assemblage de composants logiciels Python et logique de traitement des commandes.",technicalFocus:"Compréhension, débogage et amélioration progressive d’un prototype."}
+    ]), []);
 
-    ] as Project[]), []);
-
-    const skills = useMemo(() => ({
-        technical: [
-            { name: "C", level: 85 },
-            { name: "C++", level: 78 },
-            { name: "Python", level: 90 },
-            { name: "Électronique", level: 88 },
-            { name: "Conception de Circuits", level: 80 },
-            { name: "Prototypage", level: 85 },
-            { name: "Soudure", level: 92 },
-            { name: "Réseaux", level: 75 },
-            { name: "Arduino IDE", level: 95 },
-            { name: "Packet Tracer", level: 80 },
-            { name: "Multisim", level: 85 }
-        ],
-        languages: [
-            { name: "Français", level: 100 },
-            { name: "Anglais B2", level: 80 }
-        ],
-        soft: [
-            { name: "Rigueur et Ponctualité", level: 100 },
-            { name: "Travail en Équipe et Communication", level: 100 },
-            { name: "Adaptabilité", level: 100 },
-            { name: "Pensée Analytique", level: 100 },
-            { name: "Autonomie", level: 100 }
-        ]
-    }), []);
+    const skillGroups = useMemo(() => ([
+        {number:"01",title:"Électronique & conception",description:"Comprendre, assembler et mettre au point un système.",topics:["Électronique analogique et numérique","Conception de montages","Lecture de schémas et prototypage"]},
+        {number:"02",title:"Instrumentation & diagnostic",description:"Mesurer, vérifier et chercher l’origine d’une anomalie.",topics:["Mesures électriques","Contrôle de sondes échographiques","Procédures de test et diagnostic"]},
+        {number:"03",title:"Systèmes embarqués",description:"Faire fonctionner ensemble matériel, commande et communication.",topics:["Microcontrôleurs ESP32","Intégration de capteurs et actionneurs","Wi-Fi et systèmes connectés"]},
+        {number:"04",title:"Développement & outils",description:"Lire, adapter et déboguer des programmes utilisés dans les projets.",topics:["Bases en Python et C/C++","Analyse et débogage de code","Arduino IDE et outils de simulation"]}
+    ]), []);
 
     const education = useMemo(() => ({
         institution: "Lycée Édouard Branly",
         location: "Lyon",
-        degree: "BTS CIEL Option B Électronique et Réseaux : Électronique et Réseaux",
-        period: "09/2024 - Présent"
+        degree: "CPGE ATS",
+        period: "2026–2027",
+        previousDegree: "BTS CIEL — option B (Électronique et réseaux)",
+        previousPeriod: "2024–2026"
     }), []);
-
-    useEffect(() => {
-        const handleMouseMove = (e: MouseEvent) => {
-            setMousePosition({ x: e.clientX, y: e.clientY });
-        };
-
-        window.addEventListener('mousemove', handleMouseMove);
-
-        return () => {
-            window.removeEventListener('mousemove', handleMouseMove);
-        };
-    }, []);
-
-    useEffect(() => {
-        if (cursorOuterRef.current) {
-            gsap.to(cursorOuterRef.current, {
-                x: mousePosition.x,
-                y: mousePosition.y,
-                duration: 1,
-                ease: "power2.out"
-            });
-        }
-    }, [mousePosition]);
 
     useEffect(() => {
         const tl = gsap.timeline();
@@ -324,20 +263,13 @@ const Main: React.FC = () => {
                 ease: "power3.out"
             }, "-=0.7");
 
-            tl.from(".profile-photo", {
-                scale: 0.8,
+            tl.from(".hero-visual", {
+                scale: 0.92,
                 opacity: 0,
-                duration: 1.5,
-                ease: "power3.out(1, 0.5)"
+                duration: 1.2,
+                ease: "power3.out"
             }, "-=1");
 
-            tl.from(".social-icons a", {
-                opacity: 0,
-                y: 20,
-                stagger: 0.1,
-                duration: 0.8,
-                ease: "back.out(1.7)"
-            }, "-=1");
         };
 
         const timer = setTimeout(() => {
@@ -345,21 +277,6 @@ const Main: React.FC = () => {
             splitTextElements();
             splitTextElements2();
             animateSections();
-
-            gsap.utils.toArray<HTMLElement>('.skill-progress').forEach((bar) => {
-                const value = parseInt(bar.getAttribute('data-value') || '0');
-
-                gsap.to(bar, {
-                    width: `${value}%`,
-                    duration: .25,
-                    ease: "power2.out",
-                    scrollTrigger: {
-                        trigger: bar,
-                        start: "top 90%",
-                        toggleActions: "play none none none"
-                    }
-                });
-            });
 
             gsap.utils.toArray<HTMLElement>('.timeline-item').forEach((item, i) => {
                 gsap.from(item, {
@@ -415,7 +332,7 @@ const Main: React.FC = () => {
 
     const scrollToSection = useCallback((sectionName: string) => {
         setIsMenuOpen(false);
-        const sectionId = sectionMapping[sectionName];
+        const sectionId = sectionMapping[sectionName] || sectionName;
         const section = sectionRefs[sectionId as keyof typeof sectionRefs]?.current;
 
         if (section) {
@@ -459,6 +376,7 @@ const Main: React.FC = () => {
     });
 
     const [formSubmitted, setFormSubmitted] = useState(false);
+    const [formError, setFormError] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     const validateEmail = (email: string): boolean => {
@@ -500,6 +418,8 @@ const Main: React.FC = () => {
 
         if (!newErrors.name && !newErrors.email && !newErrors.subject && !newErrors.message) {
             setIsSubmitting(true);
+            setFormSubmitted(false);
+            setFormError(false);
 
             try {
                 const formDataObj = new FormData();
@@ -516,142 +436,29 @@ const Main: React.FC = () => {
                     body: formDataObj
                 });
 
-                if (response.ok) {
+                // FormSubmit peut renvoyer HTTP 200 même si son JSON indique un refus
+                // (ex. adresse destinataire non activée). Vérifier les deux signaux.
+                const result: { success?: string | boolean } | null = await response.json().catch(() => null);
+                const accepted = response.ok && (result?.success === true || result?.success === 'true');
+                if (accepted) {
                     setFormSubmitted(true);
                     setFormData({ name: '', email: '', subject: '', message: '' });
+                } else {
+                    setFormError(true);
                 }
             } catch (error) {
                 console.error('Erreur lors de l\'envoi du formulaire:', error);
-                setFormSubmitted(true);
+                setFormError(true);
             } finally {
                 setIsSubmitting(false);
             }
         }
     };
 
-    const containerRef = useRef<HTMLDivElement>(null);
-    const sceneRef = useRef<Scene | null>(null);
-    const modelRef = useRef<any>(null);
-    const rendererRef = useRef<WebGLRenderer | null>(null);
-    const cameraRef = useRef<PerspectiveCamera | null>(null);
-
-    useEffect(() => {
-        gsap.registerPlugin(ScrollTrigger);
-
-        const scene = new Scene();
-        sceneRef.current = scene;
-
-        const camera = new PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
-        camera.position.set(-.15, -1, 3);
-        cameraRef.current = camera;
-
-        const renderer = new WebGLRenderer({ alpha: true, antialias: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setClearColor(0xffffff, 0);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-        rendererRef.current = renderer;
-
-        if (containerRef.current) {
-            const existingCanvas = containerRef.current.querySelector('canvas');
-            if (existingCanvas) {
-                existingCanvas.remove();
-            }
-            containerRef.current.appendChild(renderer.domElement);
-        }
-
-        const ambientLight = new AmbientLight(0x404040, 1);
-        scene.add(ambientLight);
-
-        const directionalLight = new DirectionalLight(0xffffff, 1);
-        directionalLight.position.set(10, 10, 5);
-        scene.add(directionalLight);
-
-        const dracoLoader = new DRACOLoader();
-        dracoLoader.setDecoderPath('https://www.gstatic.com/draco/v1/decoders/');
-        const loader = new GLTFLoader();
-        loader.setDRACOLoader(dracoLoader);
-
-        const gltfPath = '/env/car.glb';
-
-        loader.load(gltfPath, (gltf: any) => {
-            const model = gltf.scene;
-
-            const updateModelTransform = () => {
-                if (window.innerWidth < 769) {
-                    model.position.set(-.1, -1.2, 0);
-                    model.scale.set(2, 2, 2);
-                }
-                else if (window.innerWidth < 1100) {
-                    model.position.set(-0.5, -.6, 0);
-                    model.scale.set(4, 4, 4);
-                } else {
-                    model.position.set(-1, -.6, 0);
-                    model.scale.set(4, 4, 4);
-                }
-            };
-
-            updateModelTransform();
-
-            model.rotation.set(0, -Math.PI / 1.3, 0);
-            modelRef.current = model;
-
-            model.traverse((child: any) => {
-                if (child instanceof Mesh) {
-                    child.castShadow = true;
-                    child.receiveShadow = true;
-                }
-            });
-
-            scene.add(model);
-
-            window.addEventListener('resize', updateModelTransform);
-        });
-
-        const animate = () => {
-            requestAnimationFrame(animate);
-            if (rendererRef.current && sceneRef.current && cameraRef.current) {
-                rendererRef.current.render(sceneRef.current, cameraRef.current);
-            }
-        };
-        animate();
-
-        const handleResize = () => {
-            if (cameraRef.current && rendererRef.current) {
-                cameraRef.current.aspect = window.innerWidth / window.innerHeight;
-                cameraRef.current.updateProjectionMatrix();
-                rendererRef.current.setSize(window.innerWidth, window.innerHeight);
-
-                if (modelRef.current) {
-                    const scaleFactor = window.innerWidth < 768 ? 2.5 : 4;
-                    modelRef.current.scale.set(scaleFactor, scaleFactor, scaleFactor);
-                }
-            }
-        };
-
-        window.addEventListener('resize', handleResize);
-
-        renderer.domElement.style.position = 'absolute';
-        renderer.domElement.style.top = '0';
-        renderer.domElement.style.left = '0';
-        renderer.domElement.style.zIndex = '-1';
-
-        return () => {
-            window.removeEventListener('resize', handleResize);
-            ScrollTrigger.getAll().forEach(t => t.kill());
-            if (rendererRef.current) {
-                rendererRef.current.dispose();
-            }
-        };
-    }, []);
 
     return (
         <>
 
-
-            {/* Curseur personnalisé */}
-            <div className="cursor">
-                <div ref={cursorOuterRef} className="cursor-outline"></div>
-            </div>
 
             {/* En-tête */}
             <header ref={headerRef} className="header">
@@ -659,15 +466,15 @@ const Main: React.FC = () => {
                     <div className="logo">
                         <Link to="/">JP</Link>
                     </div>
-                    <nav className={`nav ${isMenuOpen ? 'nav-open' : ''}`}>
+                    <nav id="portfolio-navigation" className={`nav ${isMenuOpen ? 'nav-open' : ''}`}>
                         <ul className="nav-list">
                             {['accueil', 'à propos', 'compétences', 'expérience', 'projets', 'contact'].map((section) => (
                                 <li key={section} className="nav-item">
                                     <button
-                                        className={`nav-link ${activeSection === section ? 'active' : ''}`}
+                                        className={`nav-link ${activeSection === sectionMapping[section] ? 'active' : ''}`}
                                         onClick={() => {
                                             scrollToSection(section);
-                                            setActiveSection(section);
+                                            setActiveSection(sectionMapping[section]);
                                         }}
                                     >
                                         {section.charAt(0).toUpperCase() + section.slice(1)}
@@ -679,7 +486,9 @@ const Main: React.FC = () => {
                     <button
                         className={`menu-toggle ${isMenuOpen ? 'open' : ''}`}
                         onClick={() => setIsMenuOpen(!isMenuOpen)}
-                        aria-label="Basculer le menu"
+                        aria-label={isMenuOpen ? "Fermer le menu" : "Ouvrir le menu"}
+                        aria-expanded={isMenuOpen}
+                        aria-controls="portfolio-navigation"
                     >
                         <span></span>
                         <span></span>
@@ -698,43 +507,42 @@ const Main: React.FC = () => {
                 data-mouse="0.11"
                 data-strength="0.36"
                 data-relaxation="0.96">
-                {/* Section Héro */}
-                <div
-                    ref={containerRef}
-                    style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
-                />
+                {/* Accueil : portrait professionnel à intégrer lors de la passe finale */}
                 <section id="home" ref={sectionRefs.home} className="hero-section">
-                    <div className="parallax-bg"></div>
+                    <div className="parallax-bg" aria-hidden="true"></div>
                     <div className="container hero-container">
                         <div className="hero-content">
-                            <h1 className="hero-title animate-text">
-                                {personalInfo.name}
-                            </h1>
-                            <h2 className="hero-subtitle animate-text">
-                                {personalInfo.title}
-                            </h2>
-                            <div className="hero-cta" style={{ display: "flex", justifyContent: "center", gap: "15px", flexWrap: "wrap" }}>
+                            <p className="hero-eyebrow">ÉLECTRONIQUE · SYSTÈMES EMBARQUÉS</p>
+                            <h1 className="hero-title">{personalInfo.name}</h1>
+                            <h2 className="hero-subtitle animate-text">{personalInfo.title}</h2>
+                            <p className="hero-description">
+                                Recherche d’une alternance pour intégrer une formation d’ingénieur à la rentrée 2027.
+                                Conception électronique et projets techniques concrets.
+                            </p>
+                            <div className="hero-cta">
                                 <button className="btn btn-primary" onClick={() => scrollToSection('projects')}>
-                                    Voir mes Projets
+                                    Voir mes projets
                                 </button>
-
-                                <button className="btn btn-outline" onClick={() => scrollToSection('contact')}>
-                                    Me Contacter
-                                </button>
-
-                                <a
-                                    href="/CV_Joris_Payen.pdf"
-                                    download="CV_Joris_Payen.pdf"
-                                    className="btn btn-secondary"
-                                >
+                                <a href="/CV_Joris_Payen.pdf?v=20261122-final" download="CV_Joris_Payen.pdf" className="btn btn-secondary">
                                     Télécharger mon CV
                                 </a>
+                                <button className="btn btn-outline" onClick={() => scrollToSection('contact')}>
+                                    Me contacter
+                                </button>
                             </div>
                         </div>
-                        <div className="profile-photo-container">
-                            <div className="profile-photo">
-                                <div className="photo-outline"></div>
-                                <div className="photo-glow"></div>
+                        <div className="hero-visual" aria-hidden="true">
+                            <div className="hero-visual-frame">
+                                <span className="hero-visual-chip">
+                                    <span className="hero-visual-fallback">JP</span>
+                                    <img src="/portrait-joris.webp"
+                                         alt=""
+                                         className="hero-visual-photo"
+                                         loading="eager"
+                                         decoding="async"
+                                         onError={(event) => { event.currentTarget.style.display = 'none'; }} />
+                                </span>
+                                <div className="hero-visual-caption">CONCEVOIR <span>·</span> TESTER <span>·</span> COMPRENDRE</div>
                             </div>
                         </div>
                     </div>
@@ -748,7 +556,7 @@ const Main: React.FC = () => {
                 <section id="about" ref={sectionRefs.about} className="about-section">
                     <div className="container">
                         <div className="section-header">
-                            <h2 className="section-title animate-text">À Propos de Moi</h2>
+                            <h2 className="section-title animate-text">À propos de moi</h2>
                             <div className="section-divider"></div>
                         </div>
                         <div className="about-content">
@@ -759,84 +567,45 @@ const Main: React.FC = () => {
                             </div>
                             <div className="about-education">
                                 <h3 className="animate-text">Formation</h3>
-                                <div className="education-card">
-                                    <div className="education-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                            <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
-                                            <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
-                                        </svg>
-                                    </div>
-                                    <div className="education-details">
-                                        <h4>{education.degree}</h4>
-                                        <h5>{education.institution} | {education.location}</h5>
-                                        <p>{education.period}</p>
-                                    </div>
+                                <div className="education-list">
+                                    <article className="education-item education-item-current">
+                                        <div className="education-item-top">
+                                            <span className="education-period">{education.period}</span>
+                                            <span className="education-status">En cours</span>
+                                        </div>
+                                        <h4>{education.degree} — Adaptation Technicien Supérieur</h4>
+                                        <p>{education.institution} · {education.location}</p>
+                                        <p className="education-caption">Année préparatoire aux écoles d’ingénieurs.</p>
+                                    </article>
+                                    <article className="education-item">
+                                        <div className="education-item-top">
+                                            <span className="education-period">{education.previousPeriod}</span>
+                                        </div>
+                                        <h4>{education.previousDegree}</h4>
+                                        <p>{education.institution} · {education.location}</p>
+                                        <p className="education-caption">Électronique et réseaux.</p>
+                                    </article>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </section>
 
-                {/* Section Compétences */}
+                {/* Compétences structurées, sans pourcentages subjectifs */}
                 <section id="skills" ref={sectionRefs.skills} className="skills-section">
                     <div className="container">
-                        <div className="section-header">
-                            <h2 className="section-title animate-text">Compétences</h2>
-                            <div className="section-divider"></div>
+                        <div className="section-header"><h2 className="section-title animate-text">Compétences</h2><div className="section-divider"></div></div>
+                        <p className="skills-intro">Des compétences construites en BTS CIEL, en entreprise et au travers de projets personnels.</p>
+                        <div className="skill-groups-grid">
+                            {skillGroups.map(group => (
+                                <article key={group.number} className="skill-group-card">
+                                    <div className="skill-group-heading"><span className="skill-group-number" aria-hidden="true">{group.number}</span><h3>{group.title}</h3></div>
+                                    <p className="skill-group-description">{group.description}</p>
+                                    <ul className="skill-topic-list">{group.topics.map(topic => <li key={topic}>{topic}</li>)}</ul>
+                                </article>
+                            ))}
                         </div>
-
-                        <div className="skills-container">
-                            <div className="skills-category">
-                                <h3 className="category-title animate-text">Compétences Techniques</h3>
-                                <div className="skills-grid">
-                                    {skills.technical.map((skill, index) => (
-                                        <div key={index} className="skill-item">
-                                            <div className="skill-header">
-                                                <span className="skill-name">{skill.name}</span>
-                                                <span className="skill-percentage">{skill.level}%</span>
-                                            </div>
-                                            <div className="skill-bar">
-                                                <div className="skill-progress" data-value={skill.level}></div>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-
-                            <div className="skills-category">
-                                <h3 className="category-title animate-text">Langues</h3>
-                                <div className="skills-grid">
-                                    {skills.languages.map((skill, index) => (
-                                        <div key={index} className="skill-item">
-                                            <div className="skill-header">
-                                                <span className="skill-name">{skill.name}</span>
-                                                <span className="skill-percentage">{skill.level}%</span>
-                                            </div>
-                                            <div className="skill-bar">
-                                                <div className="skill-progress" data-value={skill.level}></div>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-
-                            <div className="skills-category">
-                                <h3 className="category-title animate-text">Compétences Générales</h3>
-                                <div className="skills-grid">
-                                    {skills.soft.map((skill, index) => (
-                                        <div key={index} className="skill-item">
-                                            <div className="skill-header">
-                                                <span className="skill-name">{skill.name}</span>
-                                                <span className="skill-percentage">{skill.level}%</span>
-                                            </div>
-                                            <div className="skill-bar">
-                                                <div className="skill-progress" data-value={skill.level}></div>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
+                        <div className="language-strip"><strong>Langues</strong><span>Français · langue maternelle</span><span>Anglais · niveau B2</span></div>
                     </div>
                 </section>
 
@@ -844,7 +613,7 @@ const Main: React.FC = () => {
                 <section id="experience" ref={sectionRefs.experience} className="experience-section">
                     <div className="container">
                         <div className="section-header">
-                            <h2 className="section-title animate-text">Expérience</h2>
+                            <h2 className="section-title animate-text">Expériences professionnelles</h2>
                             <div className="section-divider"></div>
                         </div>
 
@@ -868,59 +637,37 @@ const Main: React.FC = () => {
                     </div>
                 </section>
 
-                {/* Section Projets */}
+                {/* Projets : vidéo à la demande et démarche technique */}
                 <section id="projects" ref={sectionRefs.projects} className="projects-section">
                     <div className="container">
-                        <div className="section-header">
-                            <h2 className="section-title animate-text">Mes Projets</h2>
-                            <div className="section-divider"></div>
-                        </div>
-
+                        <div className="section-header"><h2 className="section-title animate-text">Mes projets</h2><div className="section-divider"></div></div>
+                        <p className="projects-intro">Trois réalisations pour montrer ma démarche : partir d’un besoin, concevoir un système et le mettre à l’épreuve.</p>
                         <div className="projects-grid">
-                            {project.map((project, index) => (
-                                <div key={index} className="project-card">
+                            {projects.map((project, index) => (
+                                <article key={project.title} className="project-card">
                                     <div className="project-image">
-                                        {project.video ? (
-                                            <video
-                                                autoPlay
-                                                muted
-                                                loop
-                                                playsInline
-                                                src={project.video}
-                                                className="project-media"
-                                            ></video>
-                                        ) : project.image ? (
-                                            <img
-                                                src={project.image}
-                                                alt={project.title}
-                                                className="project-media"
-                                            />
-                                        ) : (
-                                            <div className="project-placeholder"></div>
-                                        )}
+                                        <video src={project.video} className="project-media" autoPlay muted loop playsInline preload="metadata" aria-label={`Vidéo de démonstration du projet ${project.title} (muette et en boucle)`}>
+                                            Votre navigateur ne prend pas en charge la lecture vidéo.
+                                        </video>
                                     </div>
                                     <div className="project-content">
+                                        <div className="project-meta"><span className="project-index">{String(index + 1).padStart(2, '0')} / 03</span><span className="project-kind">{project.kind}</span></div>
                                         <h3 className="project-title">{project.title}</h3>
                                         <p className="project-description">{project.description}</p>
-                                        <div className="project-tags">
-                                            {project.technologies.map((tech, i) => (
-                                                <span key={i} className="project-tag">{tech}</span>
-                                            ))}
-                                        </div>
-                                        <div className="project-links">
-                                            <a href="#" className="project-link">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                                    <circle cx="12" cy="12" r="10"></circle>
-                                                    <polyline points="12 16 16 12 12 8"></polyline>
-                                                    <line x1="8" y1="12" x2="16" y2="12"></line>
-                                                </svg>
-                                                Voir les Details
-                                            </a>
-                                        </div>
+                                        <div className="project-tags">{project.technologies.map(tech => <span key={tech} className="project-tag">{tech}</span>)}</div>
+                                        <details className="project-details">
+                                            <summary>Découvrir la démarche <span aria-hidden="true" className="project-details-icon">+</span></summary>
+                                            <div className="project-details-content">
+                                                <h4>Objectif</h4><p>{project.objective}</p>
+                                                <h4>Mise en œuvre</h4><p>{project.implementation}</p>
+                                                <h4>Points techniques</h4><p>{project.technicalFocus}</p>
+                                            </div>
+                                        </details>
                                     </div>
-                                </div>
+                                </article>
                             ))}
                         </div>
+                        <p className="projects-outro">Les vidéos illustrent mes travaux. Les détails techniques peuvent être approfondis lors d’un échange.</p>
                     </div>
                 </section>
 
@@ -928,94 +675,57 @@ const Main: React.FC = () => {
                 <section id="contact" ref={sectionRefs.contact} className="contact-section">
                     <div className="container">
                         <div className="section-header">
-                            <h2 className="section-title animate-text">Me Contacter</h2>
+                            <h2 className="section-title animate-text">Me contacter</h2>
                             <div className="section-divider"></div>
                         </div>
 
                         <div className="contact-container">
                             <div className="contact-info">
-                                <h3>Restons en Contact</h3>
-                                <p>N'hésitez pas à me contacter pour toute demande ou collaboration.</p>
+                                <span className="contact-availability">Recherche d’alternance · Septembre 2027</span>
+                                <h3>Échangeons sur vos projets</h3>
+                                <p>Je recherche une entreprise pour une alternance en école d’ingénieurs, avec une orientation électronique et systèmes embarqués. Vous pouvez me joindre directement :</p>
 
                                 <div className="contact-details">
-                                    <div className="contact-item">
-                                        <a href="tel:+33787498686">
-                                            <div className="contact-icon">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-                                                </svg>
-                                            </div>
-                                        </a>
-                                        <div className="contact-text">
-                                            <h4>Téléphone</h4>
-                                            <p>{personalInfo.phone}</p>
+                                    <a className="contact-item contact-clickable" href="mailto:payen.joris.pro@gmail.com" aria-label="Envoyer un e-mail à Joris Payen">
+                                        <div className="contact-icon" aria-hidden="true">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m2 6 10 7 10-7"></path></svg>
                                         </div>
-                                    </div>
-                                    <div className="contact-item">
-                                        <a href="mailto:payen.joris.pro@gmail.com">
-                                            <div className="contact-icon">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                                                    <polyline points="22,6 12,13 2,6"></polyline>
-                                                </svg>
-                                            </div>
-                                        </a>
-                                        <div className="contact-text">
-                                            <h4>Email</h4>
-                                            <p>{personalInfo.email}</p>
+                                        <div className="contact-text"><h4>Email</h4><p>{personalInfo.email}</p></div>
+                                    </a>
+                                    <a className="contact-item contact-clickable" href="tel:+33787498686" aria-label="Appeler Joris Payen">
+                                        <div className="contact-icon" aria-hidden="true">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72l.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
                                         </div>
-                                    </div>
-
-                                    <div className="contact-item">
-                                        <a href="https://www.google.fr/maps/place/7+Rue+des+C%C3%A8dres,+69340+Francheville/">
-                                            <div className="contact-icon">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                                                    <circle cx="12" cy="10" r="3"></circle>
-                                                </svg>
-                                            </div>
-                                        </a>
-                                        <div className="contact-text">
-                                            <h4>Adresse</h4>
-                                            <p>{personalInfo.address}</p>
+                                        <div className="contact-text"><h4>Téléphone</h4><p>{personalInfo.phone}</p></div>
+                                    </a>
+                                    <div className="contact-item contact-item-location">
+                                        <div className="contact-icon" aria-hidden="true">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
                                         </div>
+                                        <div className="contact-text"><h4>Localisation</h4><p>{personalInfo.address}</p></div>
                                     </div>
                                 </div>
 
-                                <div className="social-icons">
-                                    {/* 🔹 LinkedIn */}
-                                    <a
-                                        href="https://www.linkedin.com/in/joris-payen-19b747395/"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="social-icon"
-                                        aria-label="LinkedIn"
-                                    >
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                                            <rect x="2" y="9" width="4" height="12"></rect>
-                                            <circle cx="4" cy="4" r="2"></circle>
-                                        </svg>
+                                <div className="contact-social">
+                                    <a href="https://www.linkedin.com/in/joris-payen-19b747395/"
+                                       target="_blank" rel="noopener noreferrer" className="contact-social-link">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.35V9h3.414v1.561h.049c.476-.9 1.637-1.85 3.37-1.85 3.6 0 4.265 2.37 4.265 5.455v6.286zM5.337 7.433a2.063 2.063 0 1 1 0-4.127 2.063 2.063 0 0 1 0 4.127zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .775 0 1.729v20.542C0 23.225.792 24 1.771 24h20.451C23.2 24 24 23.225 24 22.271V1.729C24 .775 23.2 0 22.225 0z"></path></svg>
+                                        <span>Retrouver mon profil LinkedIn</span>
+                                        <span aria-hidden="true">↗</span>
                                     </a>
-
-                                    {/* 🔹 NewGenesis */}
-                                    <a
-                                        href="https://www.newgenesis.ai"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="social-icon"
-                                        aria-label="NewGenesis"
-                                    >
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                            <circle cx="12" cy="12" r="10"></circle>
-                                            <path d="M12 6v6l4 2"></path>
-                                        </svg>
+                                    <a href="/CV_Joris_Payen.pdf?v=20261122-final"
+                                       download="CV_Joris_Payen.pdf"
+                                       className="contact-social-link contact-cv-link">
+                                        <span>Télécharger mon CV</span>
+                                        <span aria-hidden="true">↓</span>
                                     </a>
                                 </div>
 
                             </div>
 
                             <div className="contact-form">
+                                {formSubmitted && <p role="status">Votre demande a été transmise au service d’envoi. Merci pour votre message.</p>}
+                                {formError && <p role="alert" className="form-alert">L’envoi a échoué. <a href="mailto:payen.joris.pro@gmail.com?subject=Contact%20via%20le%20portfolio">Écrivez-moi directement par e-mail</a>.</p>}
                                 <form onSubmit={handleSubmit}>
                                     <div className="form-group">
                                         <label htmlFor="name" className="form-label">Votre Nom</label>
@@ -1078,7 +788,7 @@ const Main: React.FC = () => {
                                     </div>
 
                                     <button type="submit" className="btn btn-primary" disabled={isSubmitting}>
-                                        <span>{isSubmitting ? 'Envoi...' : 'Envoyer le Message'}</span>
+                                        <span>{isSubmitting ? 'Envoi...' : 'Envoyer le message'}</span>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                             <line x1="22" y1="2" x2="11" y2="13"></line>
                                             <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
@@ -1099,14 +809,14 @@ const Main: React.FC = () => {
                             </div>
                         </div>
                         <div className="footer-bottom">
-                            <p>&copy; {new Date().getFullYear()} <a href="www.newgenesis.ai">NewGenesis</a>. Tous droits réservés.</p>
+                            <p>&copy; {new Date().getFullYear()} Joris Payen. Tous droits réservés.</p>
                         </div>
                     </div>
                     <button
-                        className={`back-to-top ${activeSection !== 'accueil' ? 'visible' : ''}`}
+                        className={`back-to-top ${activeSection !== 'home' ? 'visible' : ''}`}
                         onClick={() => {
                             scrollToSection('accueil');
-                            setActiveSection('accueil');
+                            setActiveSection('home');
                         }}
                         aria-label="Retour en haut"
                     >

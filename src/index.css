@@ -243,41 +243,6 @@ canvas {
 }
 
 /* ==================== */
-/* Custom Cursor Styles */
-/* ==================== */
-
-.cursor {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 40px;
-  height: 40px;
-  pointer-events: none;
-  z-index: var(--z-modal);
-  mix-blend-mode: difference;
-  transform: translate(-50%, -50%);
-}
-
-.cursor-outline {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 40px;
-  height: 40px;
-  background-color: transparent;
-  border: .15vw solid var(--text-primary);
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  transition: width 0.3s, height 0.3s, opacity 0.3s;
-}
-
-@media (hover: none) {
-  .cursor {
-    display: none;
-  }
-}
-
-/* ==================== */
 /* Header Styles */
 /* ==================== */
 

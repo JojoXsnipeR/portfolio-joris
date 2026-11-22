@@ -93,7 +93,7 @@ const Main: React.FC = () => {
         },
         {
             title: "Auxiliaire de vie",
-            company: "EHPAD Le Garezin",
+            company: "EHPAD Le Gareizin",
             location: "Francheville",
             period: "Juillet–août 2024",
             type: "CDD",

@@ -436,7 +436,11 @@ const Main: React.FC = () => {
                     body: formDataObj
                 });
 
-                if (response.ok) {
+                // FormSubmit peut renvoyer HTTP 200 même si son JSON indique un refus
+                // (ex. adresse destinataire non activée). Vérifier les deux signaux.
+                const result: { success?: string | boolean } | null = await response.json().catch(() => null);
+                const accepted = response.ok && (result?.success === true || result?.success === 'true');
+                if (accepted) {
                     setFormSubmitted(true);
                     setFormData({ name: '', email: '', subject: '', message: '' });
                 } else {

@@ -61,7 +61,7 @@ const Main: React.FC = () => {
 
     const personalInfo = useMemo(() => ({
         name: "Joris Payen",
-        title: "Élève en CPGE ATS · Futur ingénieur en alternance",
+        title: "Élève en CPGE ATS",
         phone: "+33 7 87 49 86 86",
         email: "payen.joris.pro@gmail.com",
         address: "Lyon (69)",
@@ -511,7 +511,7 @@ const Main: React.FC = () => {
                             <h2 className="hero-subtitle animate-text">{personalInfo.title}</h2>
                             <p className="hero-description">
                                 Recherche d’une alternance pour intégrer une formation d’ingénieur à la rentrée 2027.
-                                Conception, électronique et projets techniques concrets.
+                                Conception électronique et projets techniques concrets.
                             </p>
                             <div className="hero-cta">
                                 <button className="btn btn-primary" onClick={() => scrollToSection('projects')}>
